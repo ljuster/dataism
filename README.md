@@ -1,2 +1,0 @@
-# dataism
-data visualization
