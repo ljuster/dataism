@@ -20,21 +20,12 @@
       </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Buy Some Artsy you little Fartsy<span class="caret"></span></a>
-                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                        <input type="hidden" name="hosted_button_id" value="B4SLYV93JD2MJ">
-                        <ul><tr>CHOOSE YOUR DIMENSIONS</tr><hr>
-                        <tr><td><select name="os0">
-                            <option value="9in x 6in">9in x 6in $35.00 USD</option>
-                            <option value="11in x 7in">11in x 7in $50.00 USD</option>
-                            <option value="19in x 14in">19in x 14in $125.00 USD</option>
-                        </select> </td></tr>
-                        </table>
-                        <input type="hidden" name="currency_code" value="USD">
-                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"><hr><hr>
-                        <h1>Send your image to <a href="mailto:leorajuster@gmail.com" role="button">leorajuster@gmail.com</a>
-              </form>
+                 <ul>
+                   <li><%= link_to('5in x 9in', :controller => :main, :action => :index, :size => 'small') %></li>
+                   <li><%= link_to('7in x 11in', :controller => :main, :action => :index, :size => 'med') %></li>
+                   <li><%= link_to('15in x 15in', :controller => 'main', :action => :index, :size => 'large') %></li>
+                    <li><%= link_to('Custom', :controller => 'main', :action => :index, :size => 'custom') %></li>  
+                 </ul>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

@@ -32,6 +32,9 @@ gem 'spring',        group: :development
 
 gem 'puma'
 
+# drop images
+gem 'dropzonejs-rails', '~> 0.7.3'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
