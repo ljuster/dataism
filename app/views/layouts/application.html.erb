@@ -16,16 +16,16 @@
         <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
       </li>
       <li>
-        <a href="https://devcenter.heroku.com/articles/how-heroku-works"><span class="glyphicon glyphicon-user"></span> How Leora Works</a>
+        <a href="leorajuster.com"><span class="glyphicon glyphicon-user"></span> How Leora Works</a>
       </li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Buy Some Artsy you little Fartsy<span class="caret"></span></a>
-                 <ul>
-                   <li><%= link_to('5in x 9in', :controller => :main, :action => :index, :size => 'small') %></li>
-                   <li><%= link_to('7in x 11in', :controller => :main, :action => :index, :size => 'med') %></li>
-                   <li><%= link_to('15in x 15in', :controller => 'main', :action => :index, :size => 'large') %></li>
-                    <li><%= link_to('Custom', :controller => 'main', :action => :index, :size => 'custom') %></li>  
-                 </ul>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Buy Some Arts you little Farts<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to('5in x 9in', :controller => :purchases, :action => :new, :size => 'small') %></li>
+          <li><%= link_to('7in x 11in', :controller => :purchases, :action => :new, :size => 'med') %></li>
+          <li><%= link_to('15in x 15in', :controller => :purchases, :action => :new, :size => 'large') %></li>
+          <li><%= link_to('Custom', :controller => :purchases, :action => :new, :size => 'custom') %></li>
+        </ul>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
