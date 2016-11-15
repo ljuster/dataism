@@ -34,6 +34,9 @@ gem 'spring',        group: :development
 
 gem 'puma'
 
+#image
+gem 'rmagick'
+
 # drop images
 gem 'dropzonejs-rails', '~> 0.7.3'
 
