@@ -13,4 +13,8 @@ class WelcomeController < ApplicationController
     render 'shared/dataviz'
   end
 
+  def interview_prep
+    render 'interview_prep/index'
+  end
+
 end
