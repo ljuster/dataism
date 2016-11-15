@@ -17,3 +17,10 @@
 
 # Ignore ruby-version
 /.ruby-version
+
+# .idea and DS_Store
+.idea/*
+app/.DS_Store
+app/assets/.DS_Store
+app/assets/images/.DS_Store
+.DS_Store

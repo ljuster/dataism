@@ -18,13 +18,10 @@
     = f.label :description
     = f.text_field :description
   .field
-    = f.label :image
-    = f.text_field :image
-  .field
     = f.label :purchase_date
     = f.datetime_select :purchase_date
   .field
-    %input.multiple{:name=> "file", :type=>"file"}
+    %input.multiple{:label=> "image", :type=>"file"}
     %form.callback{:action=> "/file-upload", :class=> "dropzone"}
-  .actions
-    = f.submit
+    .actions
+      = f.submit

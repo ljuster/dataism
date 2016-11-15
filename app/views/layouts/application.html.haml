@@ -1,0 +1,38 @@
+!!! 5
+%html
+%head
+  %title>L C J
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = stylesheet_link_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag  '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'
+  = csrf_meta_tags
+%nav.navbar.navbar-default.navbar-static-top.navbar-inverse
+  .container
+    %ul.nav.navbar-nav
+      %li.active
+        %a{:href=>"/"}
+          %span.glyphicon.glyphicon-home Home
+      %li
+        %a{:href=>"leorajuster.com",:span=> {:class=>"glyphicon glyphicon-user"}}How Leora Works
+      %li.dropdown
+        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+          %span.glyphicon.glyphicon-info-sign
+          Buy Some Arts you little Farts
+          %span.caret
+        %ul.dropdown-menu{:role=>"menu"}
+          %li
+            = link_to('5in x 9in', :controller => :purchases, :action => :new, :size => 'small')
+          %li
+            = link_to('7in x 11in', :controller => :purchases, :action => :new, :size => 'med')
+          %li
+            = link_to('15in x 15in', :controller => :purchases, :action => :new, :size => 'large')
+          %li
+            = link_to('Custom', :controller => :purchases, :action => :new, :size => 'custom')
+    %ul.nav.navbar-nav.navbar-right
+      %li.navbar-right
+        %a{:href=> "mailto:leorajuster@gmail.com"}
+          %span.glyphicon.glyphicon-book Contact
+
+= yield
+

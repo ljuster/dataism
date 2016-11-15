@@ -1,0 +1,26 @@
+.container
+  %p.notice
+    = notice
+
+  %p
+    %strong Name:
+    = @purchase.name
+
+  %p
+    %strong Email:
+    = @purchase.email
+
+  %p
+    %strong Description:
+    = @purchase.description
+
+  %p
+    %strong Image:
+    = @purchase.image
+
+  %p
+    %strong Purchase date:
+    = @purchase.purchase_date
+
+  = link_to 'Edit', edit_purchase_path(@purchase)
+  = link_to 'Back', purchases_path
