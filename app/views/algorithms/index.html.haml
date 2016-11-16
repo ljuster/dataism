@@ -1,0 +1,26 @@
+.container
+  %h1 Listing algorithms
+
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Input
+        %th Runtime
+        %th
+        %th
+        %th
+
+    %tbody
+      - @algorithms.each do |algorithm|
+        %tr
+          %td= algorithm.name
+          %td= algorithm.input
+          %td= algorithm.runtime
+          %td= link_to 'Show', algorithm
+          %td= link_to 'Edit', edit_algorithm_path(algorithm)
+          %td= link_to 'Destroy', algorithm, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+  = link_to 'New Algorithm', new_algorithm_path

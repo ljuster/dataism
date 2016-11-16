@@ -1,0 +1,18 @@
+.container
+  - if @algorithm[:isPalindrome]
+    %p WE HAVE A PALINDROME!!!
+  - else
+    %p SORRY TO SAY....NO PALINDROME FOR YOUUUUU SUCKER.
+  %p
+    %b Name:
+    = @algorithm.name
+  %p
+    %b Input:
+    = @algorithm.input
+  %p
+    %b Runtime:
+    = @algorithm.runtime
+
+  = link_to 'Edit', edit_algorithm_path(@algorithm)
+  \|
+  = link_to 'Back', algorithms_path

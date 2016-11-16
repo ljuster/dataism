@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111211407) do
+ActiveRecord::Schema.define(version: 20161116181646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "algorithms", force: :cascade do |t|
+    t.string   "name"
+    t.string   "input"
+    t.integer  "runtime"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "isPalindrome"
+  end
 
   create_table "purchases", force: :cascade do |t|
     t.string   "name"

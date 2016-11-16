@@ -9,3 +9,26 @@
       = render 'interview_prep/bigO'
   .modal-footer
     %button.btn{"data-dismiss" => "modal", :type => "button"} Close
+
+  .modal-body
+    .modal-body-content
+    .ajax-loader
+      = link_to 'Check Palindrome', new_algorithm_path(algorithm: 'palindrome')
+  .modal-footer
+    %button.btn{"data-dismiss" => "modal", :type => "button"} Close
+
+
+:coffee
+  $('a[data-toggle=modal]').on 'click', ->
+    $('.dropdown').removeClass('open')
+  # this sets up the ajax loader, and it will stay until the method specific js removes it
+  $('a[data-target=#ajax-modal]').on 'click', (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    $('body').modalmanager('loading')
+    $.rails.handleRemote( $(this) )
+  #removes whatever is in the modal body content div upon clicking close/outside modal
+  $(document).on 'click', '[data-dismiss=modal], .modal-scrollable', ->
+    $('.modal-body-content').empty()
+  $(document).on 'click', '#ajax-modal', (e) ->
+    e.stopPropagation()
