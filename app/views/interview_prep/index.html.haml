@@ -1,13 +1,10 @@
 .container
-  %div#responsive.modal.hide.fade{ :tabindex=>"-1", "data-width"=>"760"}
-  %div.modal-header
-    %button.close{:type=>"button", "data-dismiss"=>"modal", "aria-hidden"=>"true"} ×
-    %h3
-      Palindrome Test
+  .modal-header
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+  %h3.modal-title Knowledge Regions
   .modal-body
-    .row-fluid
-      %div.span6
-        = render 'interview_prep/bigO'
-    %div.modal-footer
-    %button.btn{:type=>"button", "data-dismiss"=>"modal"}
-    Close
+  .modal-body-content
+  .ajax-loader
+    %button.btn.btn-lg.btn-default=link_to 'Check Palindrome', new_algorithm_path(algorithm: 'palindrome')
+  = render 'interview_prep/bigO'
+
