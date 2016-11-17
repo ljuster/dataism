@@ -1,8 +1,12 @@
-.container
-  %h1 Big O - time complexity
-  %p How long would it take to get grandma out of the house to the supermarket via car
-  %p What about 2 grandma's ?
-  %p 3? 4? .....
-  %p n grandma's?
-  %h3 Tightest description of runtime (Big Theta)
-  %img{:src=> asset_path('80.png'), :alt=>"Card image cap", :style=>"max-width:600px;max-height:4000px"}}
+#ajax-modal.modal.hide.fade{:tabindex => "-1"}
+.modal-header
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+  %h3.modal-title Knowledge Regions
+.modal-body
+  .modal-body-content
+  .ajax-loader
+    %h1 Big O - time complexity
+    %img{:src=> asset_path('bigO.jpg'), :alt=>"Card image cap", :style=>"max-width:600px;max-height:4000px"}
+.modal-footer
+  %button.btn{"data-dismiss" => "modal", :type => "button"} Close
+

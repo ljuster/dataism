@@ -17,4 +17,8 @@ class WelcomeController < ApplicationController
     render 'interview_prep/index'
   end
 
+  def temp
+    render 'interview_prep/temp'
+  end
+
 end

@@ -15,3 +15,6 @@
 //= require turbolinks
 //= require_tree .
 //= require dropzone
+//= require bootstrap-modal
+//= require bootstrap-modalmanager
+//= require core

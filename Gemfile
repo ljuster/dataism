@@ -37,6 +37,9 @@ gem 'puma'
 #image
 gem 'rmagick'
 
+#ui
+gem 'bootstrap-modal-rails'
+
 # drop images
 gem 'dropzonejs-rails', '~> 0.7.3'
 
