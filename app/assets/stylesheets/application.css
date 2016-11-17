@@ -13,5 +13,6 @@
  *= require_tree .
  *= require_self
  *= require bootstrap-modal-bs3patch
+ *= require common
  *= require bootstrap-modal
  */
