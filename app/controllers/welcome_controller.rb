@@ -14,7 +14,8 @@ class WelcomeController < ApplicationController
   end
 
   def interview_prep
-    render 'interview_prep/index'
+    @arr = (-200..200).to_a.sample(16)
+    render 'interview_prep/index', locals: {arr: @arr}
   end
 
   def temp
