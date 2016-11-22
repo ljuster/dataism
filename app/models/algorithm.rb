@@ -55,15 +55,15 @@ class Algorithm < ActiveRecord::Base
   def quickSort(arr, left, right)
     index = partition(arr, left, right)
     if left < index - 1   # sort left half
-      index = partition(arr, left, index-1)
+      quickSort(arr, left, index-1)
     end
     if index < right    # sort right half
-      index = partition(arr, index,right)
+      quickSort(arr, index,right)
     end
   end
 
   def partition(arr, left, right)
-    pivot = arr[right]
+    pivot = arr[(left+right)/2]
     while left <= right
       while arr[left] < pivot  #Find element on left that should be on right
         left=left+1
@@ -73,6 +73,7 @@ class Algorithm < ActiveRecord::Base
       end
       if left <= right
         swap(arr,left,right)
+        puts "swapped: " + arr[left] + " with: " + arr[right]
         left=left+1
         right=right-1
       end
