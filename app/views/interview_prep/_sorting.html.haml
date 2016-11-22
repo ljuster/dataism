@@ -4,14 +4,22 @@
   .ajax-loader
     %h1 Sorting
     %img{:src=> asset_path('sorting.png'), :alt=>"Card image cap", :style=>"max-width:300px;max-height:4000px"}
+    %p
     %table.table-bordered
       %thead
         %tr
           %th{colspan: 16, style: "text-align: center"} Random numbers
       %tbody
         %tr
-        - @arr.each do |num|
+        - @arr["vals"].each do |num|
           %td #{num}
-    %p.button.btn.btn-lg.btn-default=link_to 'Sort Numbers', new_algorithm_path(algorithm: 'quickSort')
+      - if !@arr["sorted"].nil?
+        %tr
+        - @arr["sorted"].each do |num|
+          %td #{num}
+        %tr
+          %td #{@arr["runtime"]}
+
+    %p.button.btn.btn-lg.btn-default=link_to 'Sort Numbers', new_algorithm_path(algorithm: 'quickSort', arr: @arr)
 .modal-footer
   %button.btn{"data-dismiss" => "modal", :type => "button"} Close

@@ -55,34 +55,35 @@ class Algorithm < ActiveRecord::Base
   def quickSort(arr, left, right)
     index = partition(arr, left, right)
     if left < index - 1   # sort left half
-      partition(arr, left, index-1)
+      index = partition(arr, left, index-1)
     end
     if index < right    # sort right half
-      partition(arr, index,right)
+      index = partition(arr, index,right)
     end
   end
 
   def partition(arr, left, right)
-    pivot = arr[(left + right) / 2]
+    pivot = arr[right]
     while left <= right
-      while arr[left] < pivot
-        ++left
+      while arr[left] < pivot  #Find element on left that should be on right
+        left=left+1
       end
-      while arr[right] > pivot
-        ++right
+      while arr[right] > pivot  #Find element on right that should be on left
+        right=right-1
       end
       if left <= right
         swap(arr,left,right)
-        ++left
-        --right
+        left=left+1
+        right=right-1
       end
     end
+    return left
   end
 
   def swap(arr,left,right)
     temp = arr[left]
-    arr[left] = right
-    right = temp
+    arr[left] = arr[right]
+    arr[right] = temp
   end
 
   def radixSort(numbers)

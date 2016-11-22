@@ -16,10 +16,18 @@ class AlgorithmsController < ApplicationController
   # GET /algorithms/new
   def new
     @algorithm = Algorithm.new(name: params[:algorithm])
+    if(params[:algorithm]=="quickSort")
+      @arr = {"vals" => params[:arr][:vals], "sorted" => params[:arr][:vals].dup}
+      startTime = Time.now
+      @algorithm.quickSort(@arr["sorted"],0,15)
+      @arr[:runtime] = (Time.now - startTime)
+      redirect_to controller: 'welcome', action: 'interview_prep', locals: {arr: @arr}
+    end
   end
 
   # GET /algorithms/1/edit
   def edit
+
   end
 
   # POST /algorithms

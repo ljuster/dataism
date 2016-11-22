@@ -14,7 +14,11 @@ class WelcomeController < ApplicationController
   end
 
   def interview_prep
-    @arr = (-200..200).to_a.sample(16)
+    if params[:locals].nil?
+      @arr = {"vals" => (-200..200).to_a.sample(16)} if params[:locals].nil?
+    else
+      @arr = params[:locals][:arr]
+    end
     render 'interview_prep/index', locals: {arr: @arr}
   end
 
