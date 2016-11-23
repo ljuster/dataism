@@ -3,11 +3,43 @@
   .modal-header
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
   %h3.modal-title.button.btn.btn-lg.btn-default=link_to 'Check Palindrome', new_algorithm_path(algorithm: 'palindrome')
-  .modal-body
-    .modal-body-content
-    .ajax-loader
+  %button.btn#myBtn{:type => "button"} Compute nth fibonnaci number
+  #myModal.modal
+    .modal-content
+      = form_for @algorithm do |f|
+        = f.number_field :input, min: 1, max: 100
+        = f.hidden_field :name, :value => "fibonacci"
+        = f.submit 'Calculate'
   = render 'interview_prep/sorting'
   = render 'interview_prep/bigO'
   = render 'interview_prep/ooDesign'
   = render 'interview_prep/recursion', locals: {input: 0}
+
+
+
+:javascript
+    //-#// Get the modal
+  var modal = document.getElementById('myModal');
+
+  //-#// Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+   //Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
 

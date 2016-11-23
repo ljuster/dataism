@@ -1,17 +1,22 @@
 .container
-  - if @algorithm[:isPalindrome]
-    %p WE HAVE A PALINDROME!!!
-  - else
-    %p SORRY TO SAY....NO PALINDROME FOR YOUUUUU SUCKER.
-  %p
-    %b Name:
-    = @algorithm.name
-  %p
-    %b Input:
-    = @algorithm.input
-  %p
-    %b Runtime:
-    = @algorithm.runtime
+  - if @algorithm[:name] == "palindrome"
+    - if @algorithm[:isPalindrome]
+      %p WE HAVE A PALINDROME!!!
+    - else
+      %p SORRY TO SAY....NO PALINDROME FOR YOUUUUU SUCKER.
+    %p
+      %b Name:
+      = @algorithm.name
+    %p
+      %b Input:
+      = @algorithm.input
+    %p
+      %b Runtime:
+      = @algorithm.runtime
+  - if @algorithm[:name] == "fibonacci"
+    %p The #{@algorithm[:input]}th value in the fibonacci sequence is #{@algorithm[:output]}
+
+
 
   = link_to 'Edit', edit_algorithm_path(@algorithm)
   \|

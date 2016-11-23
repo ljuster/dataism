@@ -10,7 +10,10 @@ class AlgorithmsController < ApplicationController
   # GET /algorithms/1
   # GET /algorithms/1.json
   def show
-
+    if(params[:algorithm]=="fibonacci")
+      @output = @algorithm[:output]
+      redirect_to controller: 'welcome', action: 'interview_prep', locals: {output: @output}
+    end
   end
 
   # GET /algorithms/new
@@ -37,8 +40,8 @@ class AlgorithmsController < ApplicationController
     if(algorithm_params[:name]=='palindrome')
       @algorithm.isPalindrome()
     end
-    if(algorithm_params[:name]=='fibonnaci')
-      @algorith.fibonacci(algorithm_params[:input].to_i)
+    if(algorithm_params[:name]=='fibonacci')
+      @algorithm[:output] = @algorithm.fibonacci(algorithm_params[:input].to_i)
     end
     respond_to do |format|
       if @algorithm.save

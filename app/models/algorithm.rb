@@ -57,11 +57,9 @@ class Algorithm < ActiveRecord::Base
 
   def fibonacci(n)
     if n > 1
-      sum = sum + fibonacci(n - 1) + fibonacci(n-2)
-    elsif n == 1
-      sum = sum+1
+      fibonacci(n - 1) + fibonacci(n-2)
     else
-      sum
+      n
     end
   end
 
