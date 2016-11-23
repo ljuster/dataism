@@ -19,7 +19,8 @@ class WelcomeController < ApplicationController
     else
       @arr = params[:locals][:arr]
     end
-    render 'interview_prep/index', locals: {arr: @arr}
+    @algorithm = Algorithm.new(:input => 0)
+    render 'interview_prep/index', locals: {arr: @arr, algorithm: @algorithm}
   end
 
   def temp

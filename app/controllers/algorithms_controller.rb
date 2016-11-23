@@ -37,6 +37,9 @@ class AlgorithmsController < ApplicationController
     if(algorithm_params[:name]=='palindrome')
       @algorithm.isPalindrome()
     end
+    if(algorithm_params[:name]=='fibonnaci')
+      @algorith.fibonacci(algorithm_params[:input].to_i)
+    end
     respond_to do |format|
       if @algorithm.save
         format.html { redirect_to @algorithm, notice: 'Algorithm was successfully created.' }

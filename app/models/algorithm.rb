@@ -14,56 +14,24 @@ class Algorithm < ActiveRecord::Base
     self[:isPalindrome] =true
   end
 
-  def compareBinToHex
-
-  end
-
-  def convertFromBase(number,base)
-    if (base < 2 || (base > 10 && base != 16))
-      return -1
-    end
-    value = 0
-    for i in (number.length -1).downto(0)
-      digit = digitToValue(number.get(i))
-      if (digit < 0 || digit >= base)
-        return -1
-      end
-
-      exp = number.length -1 - i
-      value += digit * Math.pow(base,exp)
-    end
-    return value
-  end
-
-  def digitToValue(char)
-
-  end
-
-  def bubbleSort(numbers)
-
-  end
-
-  def selectionSort(numbers)
-
-  end
-
-  def mergeSort(numbers)
-
-  end
 
   # Pick random element and partition the array
   def quickSort(arr, left, right)
-    index = partition(arr, left, right)
-    if left < index - 1   # sort left half
-      quickSort(arr, left, index-1)
-    end
-    if index < right    # sort right half
-      quickSort(arr, index,right)
+
+    if (left < right)
+      index = partition(arr, left, right)
+      if left < index - 1   # sort left half
+        quickSort(arr, left, index-1)
+      end
+      if index < right    # sort right half
+        quickSort(arr, index,right)
+      end
     end
   end
 
+
   def partition(arr, left, right)
-    pivot = arr[(left+right)/2]
+    pivot = arr[right-1]
     while left <= right
       while arr[left] < pivot  #Find element on left that should be on right
         left=left+1
@@ -73,7 +41,7 @@ class Algorithm < ActiveRecord::Base
       end
       if left <= right
         swap(arr,left,right)
-        puts "swapped: " + arr[left] + " with: " + arr[right]
+        puts arr.to_s
         left=left+1
         right=right-1
       end
@@ -87,8 +55,14 @@ class Algorithm < ActiveRecord::Base
     arr[right] = temp
   end
 
-  def radixSort(numbers)
-
+  def fibonacci(n)
+    if n > 1
+      sum = sum + fibonacci(n - 1) + fibonacci(n-2)
+    elsif n == 1
+      sum = sum+1
+    else
+      sum
+    end
   end
 
 
