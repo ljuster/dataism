@@ -1,4 +1,4 @@
-called from a bootstrap dropdown, this closes the dropdown
+#called from a bootstrap dropdown, this closes the dropdown
 $('a[data-toggle=modal]').on 'click', ->
   $('.dropdown').removeClass('open')
 # this sets up the ajax loader, and it will stay until the method specific js removes it
