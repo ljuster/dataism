@@ -16,43 +16,43 @@ class Algorithm < ActiveRecord::Base
 
 
   # Pick random element and partition the array
-  def quickSort(arr, left, right)
-
-    if (left < right)
-      index = partition(arr, left, right)
-      if left < index - 1   # sort left half
-        quickSort(arr, left, index-1)
-      end
-      if index < right    # sort right half
-        quickSort(arr, index,right)
-      end
+  def quick_sort(a,lo,hi)
+    if lo<hi
+      p=partition(a,lo,hi)
+      quick_sort(a,lo,p-1)
+      quick_sort(a,p+1,hi)
     end
+    return a
   end
 
-
-  def partition(arr, left, right)
-    pivot = arr[right-1]
-    while left <= right
-      while arr[left] < pivot  #Find element on left that should be on right
-        left=left+1
-      end
-      while arr[right] > pivot  #Find element on right that should be on left
-        right=right-1
-      end
-      if left <= right
-        swap(arr,left,right)
-        puts arr.to_s
-        left=left+1
-        right=right-1
-      end
+  def partition(a,lo,hi)
+    i=lo
+    j=hi+1
+    pivot= a[lo]
+    while true
+      #Loop to increment i
+      begin
+        i+=1
+        break if i==hi
+      end while a[i]<pivot
+      #Loop to increment j
+      begin
+        j-=1
+        break if j==lo
+      end while a[j]>pivot
+      # break the loop if pointers cross
+      break if i>=j
+      #Swap arr[i] and arr[j]
+      temp=a[i]
+      a[i]=a[j]
+      a[j]=temp
     end
-    return left
-  end
-
-  def swap(arr,left,right)
-    temp = arr[left]
-    arr[left] = arr[right]
-    arr[right] = temp
+    # Swap arr[lo] with arr[j]
+    temp=a[lo]
+    a[lo]=a[j]
+    a[j]=temp
+    puts a.to_s
+    return j
   end
 
   def fibonacci(n)

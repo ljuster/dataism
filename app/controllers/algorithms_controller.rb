@@ -22,7 +22,7 @@ class AlgorithmsController < ApplicationController
     if(params[:algorithm]=="quickSort")
       @arr = {"vals" => params[:arr][:vals], "sorted" => params[:arr][:vals].dup}
       startTime = Time.now
-      @algorithm.quickSort(@arr["sorted"],0,15)
+      @arr["sorted"] = @algorithm.quick_sort(@arr["sorted"].map(&:to_i),0,15)
       @arr[:runtime] = (Time.now - startTime)
       redirect_to controller: 'welcome', action: 'interview_prep', locals: {arr: @arr}
     end

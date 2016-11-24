@@ -1,14 +1,15 @@
 .modal-header
 #ajax-modal.modal.hide.fade{:tabindex => "-1"}
 .modal-body
-  .modal-body-content
-  .ajax-loader
-    %h1 Sorting
-    %p
-    %table.table-bordered
-      %thead
-        %tr
-          %th{colspan: 16, style: "text-align: center"} Random numbers
+  .modal-body-content.text-md-center
+    .well.text-md-center
+      %img{:src=> asset_path('sorting.png'), :alt=>"Card image cap", :style=>"max-width:300px;max-height:4000px"}
+    - if !@arr["sorted"].nil?
+      %button.btn.btn-lg.btn-outline-primary=link_to 'Reset', controller: "welcome", action: "interview_prep"
+    - else
+      %button.btn.btn-lg.btn-success=link_to 'Sort These Random Numbers', new_algorithm_path(algorithm: 'quickSort', arr: @arr)
+
+    %table.table-bordered{:align=>"center"}
       %tbody
         %tr
         - @arr["vals"].each do |num|
@@ -19,9 +20,5 @@
           %td #{num}
         %tr
           %td #{@arr["runtime"]}
-        %p.button.btn.btn-lg.btn-default=link_to 'Reset', controller: "welcome", action: "interview_prep"
-      -else
-        %p.button.btn.btn-lg.btn-default=link_to 'Sort Numbers', new_algorithm_path(algorithm: 'quickSort', arr: @arr)
-    %img{:src=> asset_path('sorting.png'), :alt=>"Card image cap", :style=>"max-width:300px;max-height:4000px"}
 .modal-footer
   %button.btn{"data-dismiss" => "modal", :type => "button"} Close
