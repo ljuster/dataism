@@ -39,6 +39,7 @@ gem 'rmagick'
 
 #ui
 gem 'bootstrap-modal-rails'
+gem 'plotlyjs-rails'
 
 # drop images
 gem 'dropzonejs-rails', '~> 0.7.3'
