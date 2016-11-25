@@ -63,5 +63,24 @@ class Algorithm < ActiveRecord::Base
     end
   end
 
+  # @param [String] words
+  def setupDictionary(words)
+    dictionary = {}
+    words.each { |word|
+      word = word.trim()
+      if word != ""
+        if !dictionary.key?(word)
+          dictionary[:word] = 1
+        else
+          dictionary[:word] +=1
+        end
+      end
+    }
+  end
+
+  def getFrequency(word)
+
+  end
+
 
 end

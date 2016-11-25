@@ -1,25 +1,3 @@
-:javascript
-  window.onload = randomize;
-  Plotly.plot('graph', [{
-  x: [1, 2, 3],
-  y: [0, 0.5, 1],
-  line: {simplify: false},
-  }]);
-
-  function randomize() {
-    Plotly.animate('graph', {
-      data: [{y: [Math.random(), Math.random(), Math.random()]}],
-      traces: [0],
-      layout: {}
-    }, {
-      transition: {
-        duration: 500,
-        ease: 'cubic-in-out'
-      }
-    })
-    randomize();
-  }
-
 .jumbotron.text-center
   .container
     %a.lang-logo{:href=> "/"}
@@ -43,5 +21,25 @@
     %img{:src=> asset_path('7.jpg') , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
     %img{:src=> asset_path('8.jpg') , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
 
+:javascript
+  window.onload = randomize;
+  Plotly.plot('graph', [{
+  x: [1, 2, 3],
+  y: [0, 0.5, 1],
+  line: {simplify: false},
+  }]);
 
+  function randomize() {
+    Plotly.animate('graph', {
+      data: [{y: [Math.random(), Math.random(), Math.random()]}],
+      traces: [0],
+      layout: {}
+    }, {
+      transition: {
+        duration: 500,
+        ease: 'cubic-in-out'
+      }
+    })
+    randomize();
+  }
 
