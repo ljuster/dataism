@@ -13,6 +13,10 @@ class WelcomeController < ApplicationController
     render 'shared/dataviz'
   end
 
+  def github_feed
+    render 'shared/github_feed'
+  end
+
   def interview_prep
     if params[:locals].nil?
       @arr = {"vals" => (-200..200).to_a.sample(16)} if params[:locals].nil?

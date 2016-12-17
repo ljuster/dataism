@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  count: 1
+  before: 2016-12-16 14:31:34
+  after: 2016-12-16 14:31:34
+
+two:
+  name: MyString
+  count: 1
+  before: 2016-12-16 14:31:34
+  after: 2016-12-16 14:31:34

@@ -1,6 +1,16 @@
 source 'https://rubygems.org'
 ruby '2.2.5'
 
+
+#for git archives
+gem 'yajl-ruby', require: 'yajl'
+# gem 'open-uri'
+# gem 'zlib'
+
+#for react
+gem 'react-rails', '~> 1.0'
+
+
 #for haml
 gem 'haml-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
