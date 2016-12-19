@@ -13,15 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require react
-//= require react_ujs
-//= require components
 //= require_tree .
 //= require dropzone
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
 //= require core
 //= require plotly
-//= require react
-//= require react_ujs
-//= require components
