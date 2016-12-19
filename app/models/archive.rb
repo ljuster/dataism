@@ -3,6 +3,9 @@ require 'zlib'
 
 class Archive < ActiveRecord::Base
 
+
+
+
   def getTimeSpan(after,before)
     a = after.split('-')
     a_yr = a[0]

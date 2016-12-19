@@ -22,3 +22,6 @@
 //= require bootstrap-modalmanager
 //= require core
 //= require plotly
+//= require react
+//= require react_ujs
+//= require components

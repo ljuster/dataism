@@ -1,27 +1,26 @@
-%h1 Listing archives
+.container
+  %h1 Listing archives
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Count
-      %th Before
-      %th After
-      %th
-      %th
-      %th
-
-  %tbody
-    - @archives.each do |archive|
+  %table
+    %thead
       %tr
-        %td= archive.name
-        %td= archive.count
-        %td= archive.before
-        %td= archive.after
-        %td= link_to 'Show', archive
-        %td= link_to 'Edit', edit_archive_path(archive)
-        %td= link_to 'Destroy', archive, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Name
+        %th Count
+        %th
+        %th
+        %th
 
-%br
+    %tbody
+      - @archives.each do |archive|
+        %tr
+          %td= archive[0]
+          %td= archive[1]
+          -#%td= archive.before
+          -#%td= archive.after
+          -#%td= link_to 'Show', archive
+          -#%td= link_to 'Edit', edit_archive_path(archive)
+          -#%td= link_to 'Destroy', archive, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-= link_to 'New Archive', new_archive_path
+  %br
+
+  = link_to 'New Archive', new_archive_path

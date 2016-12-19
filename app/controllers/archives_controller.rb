@@ -7,26 +7,24 @@ class ArchivesController < ApplicationController
   # GET /archives
   # GET /archives.json
   def index
-    # @archives = Archive.all
+    @archives = Archive.all
     after = "2012-11-01T13:00:00Z"
     before= "2012-11-02T03:12:14-03:00"
     time_span = getTimeSpan(after,before)
     gz = open('http://data.githubarchive.org/2015-01-01-0.json.gz')
     # gz = open("http://data.githubarchive.org/#{time_span}.json.gz")
     js = Zlib::GzipReader.new(gz).read
-
+    # #
     Yajl::Parser.parse(js) do |event|
       if event["type"] == "PushEvent"
-        archive_params << {}
+        archive_params = {:user_id => event["actor"]["id"], :name => event["actor"]["login"]}
         @archive = Archive.new(archive_params)
-        if archive_count[event["actor"]["id"]].nil?
-          archive_count[event["actor"]["id"]]=1
-        else
-          archive_count[event["actor"]["id"]]+=1
-        end
+        @archive.save
       end
     end
-    what = 2
+    # Aggregate and get top
+
+    @archives = Archive.group('name').limit(42).order('count_user_id desc').count(:user_id)
   end
 
   # GET /archives/1
@@ -102,10 +100,6 @@ class ArchivesController < ApplicationController
       @archive = Archive.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def archive_params
-      params.require(:archive).permit(:name, :count, :before, :after)
-    end
 
   
 end
