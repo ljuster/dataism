@@ -8,8 +8,7 @@ gem 'yajl-ruby', require: 'yajl'
 # gem 'zlib'
 
 #for react
-gem 'react-rails', '~> 1.0'
-
+gem 'OptionParser', '~> 0.5.1'
 
 #for haml
 gem 'haml-rails'
