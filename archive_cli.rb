@@ -44,6 +44,16 @@ parser.parse!
     start_date = options[:after]
     end_date = options[:before]
 
+    # reformat date interval for json file request
+      a = start_date.split('-')
+      a_yr = a[0]
+      a_mo = a[1]
+      a_day = a[2].split(':')[0].split('T')[0]
+      b = end_date.split('-')
+      b_day = b[2].split(':')[0].split('T')[0]
+      b_hr = b[2].split(':')[0].split('T')[1]
+      formatted_time_interval = "#{a_yr}-#{a_mo}-{#{a_day}..#{b_day}}-{0..#{b_hr}}"
+
     begin
 
       con = PG.connect :dbname => 'lcj_development'
