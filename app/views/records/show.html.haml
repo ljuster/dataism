@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Data:
+  = @record.data
+%p
+  %b Data file:
+  = @record.data_file
+
+= link_to 'Edit', edit_record_path(@record)
+\|
+= link_to 'Back', records_path

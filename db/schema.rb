@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217180114) do
+ActiveRecord::Schema.define(version: 20170114230811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,14 +26,38 @@ ActiveRecord::Schema.define(version: 20161217180114) do
     t.string   "output"
   end
 
-  create_table "archives", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "count"
-    t.datetime "before"
-    t.datetime "after"
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
+  end
+
+  create_table "archives", force: :cascade do |t|
+    t.string  "name",  limit: 200
+    t.integer "count"
+  end
+
+  create_table "data_collections", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "year"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "data_files", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "image_url"
+    t.decimal  "price"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -46,6 +70,25 @@ ActiveRecord::Schema.define(version: 20161217180114) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "records", force: :cascade do |t|
+    t.text     "data"
+    t.integer  "data_file_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "records", ["data_file_id"], name: "index_records_on_data_file_id", using: :btree
+
+  create_table "variables", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type"
+    t.integer  "data_file_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "variables", ["data_file_id"], name: "index_variables_on_data_file_id", using: :btree
+
   create_table "widgets", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -54,4 +97,6 @@ ActiveRecord::Schema.define(version: 20161217180114) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "records", "data_files"
+  add_foreign_key "variables", "data_files"
 end

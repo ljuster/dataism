@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @variable.name
+%p
+  %b Type:
+  = @variable.type
+%p
+  %b Data file:
+  = @variable.data_file
+
+= link_to 'Edit', edit_variable_path(@variable)
+\|
+= link_to 'Back', variables_path
