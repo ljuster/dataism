@@ -18,7 +18,6 @@ namespace :csv do
     csv.headers.each_with_index do |header, i|
       vars << Variable.create!({
                                    :name => header,
-                                   :col_idx => i,
                                    :data_file_id => df.id
                                })
     end
