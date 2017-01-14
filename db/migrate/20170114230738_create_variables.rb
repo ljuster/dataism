@@ -1,6 +1,5 @@
 class CreateVariables < ActiveRecord::Migration
   def change
-    drop_table :variables
     create_table :variables do |t|
       t.string :name
       t.string :type
