@@ -11,7 +11,9 @@ class WelcomeController < ApplicationController
   end
 
   def dataviz
-    render 'shared/dataviz'
+    @r_ex = Rserve::Simpler.new(cmd_init: 'R CMD Rserve --no-save', hostname: 'localhost')
+    @r_ex = @r_ex.converse "mean(c(1,2,3))"  # -> 2.0
+    render 'shared/dataviz', locals: {r: @r_ex}
   end
 
   def github_feed
