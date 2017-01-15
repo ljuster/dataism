@@ -129,6 +129,9 @@ GEM
     rdoc (4.2.2)
       json (~> 1.4)
     rmagick (2.16.0)
+    rserve-client (0.3.1)
+    rserve-simpler (0.0.6)
+      rserve-client (~> 0.3.0)
     ruby_parser (3.8.3)
       sexp_processor (~> 4.1)
     sass (3.4.22)
@@ -180,6 +183,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails_12factor
   rmagick
+  rserve-simpler
   sass-rails (~> 5.0.3)
   sdoc (~> 0.4.0)
   spring
