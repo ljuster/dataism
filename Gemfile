@@ -7,8 +7,8 @@ gem 'yajl-ruby', require: 'yajl'
 # gem 'open-uri'
 # gem 'zlib'
 
-# --- language
-gem 'rserve-simpler', require: 'rserve/simpler'
+# --- stats
+gem 'statsample'
 
 #for react
 gem 'OptionParser', '~> 0.5.1'

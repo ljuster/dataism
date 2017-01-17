@@ -11,9 +11,11 @@ class WelcomeController < ApplicationController
   end
 
   def dataviz
-    @r_ex = Rserve::Simpler.new(cmd_init: 'R CMD Rserve --no-save', hostname: 'localhost')
-    @r_ex = @r_ex.converse "mean(c(1,2,3))"  # -> 2.0
-    render 'shared/dataviz', locals: {r: @r_ex}
+    @df = Daru::DataFrame.from_csv("#{Rails.root}/lib/assets/big_west_wbb_2016.csv")
+    @x = @df['fg_pct']
+    @y = @df['overall']
+    @reg = Statsample::Regression.simple(@x, @y)
+    render 'shared/dataviz', locals: {daru: @reg, x: @x, y: @y}
   end
 
   def github_feed
