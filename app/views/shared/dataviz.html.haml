@@ -1,24 +1,23 @@
 .container
   %div.row
-    = daru
-  %div.row
     %div#myDiv
   %hr
     %div.row
-      %div#graph2
+      %div#graph
 
 :javascript
     var data = [
       {
-        x: #{@x.data.data},
-        y: #{@y.data.data},
-        mode: 'line',
-        name: 'temperature'
+        x: #{@x.data},
+        y: #{@y.data},
+        mode: 'markers',
+        name: "Rank by #{@x.name}"
       }
     ];
 
     var layout = {
-
+      title: 'Big West Women\'s Basketball Statistics',
+      showlegend: true,
       // to highlight the timestamp we use shapes and create a rectangular
 
       shapes: [
@@ -29,10 +28,10 @@
           xref: 'x',
           // y-reference is assigned to the plot paper [0,1]
           yref: 'paper',
-          x0: #{@x.data.data[0]},
-          y0: #{@y.data.data[0]},
-          x1: #{@x.data.data[1]},
-          y1: #{@y.data.data[1]},
+          x0: #{@x.data.min},
+          y0: #{@y.data.min},
+          x1: #{@x.data.max},
+          y1: #{@y.data.max},
           fillcolor: '#d3d3d3',
           opacity: 0.2,
           line: {
@@ -40,22 +39,7 @@
           }
         },
 
-        // 2nd highlight during Feb 20 - Feb 23
 
-        {
-          type: 'rect',
-          xref: 'x',
-          yref: 'paper',
-          x0: '2015-02-20',
-          y0: 0,
-          x1: '2015-02-22',
-          y1: 1,
-          fillcolor: '#d3d3d3',
-          opacity: 0.2,
-          line: {
-            width: 0
-          }
-        }
       ],
       height: 500,
       width: 500
@@ -63,8 +47,8 @@
 
   Plotly.newPlot('myDiv', data, layout);
   Plotly.plot('graph', [{
-  x: [1, 2, 3],
-  y: [0, 0.5, 1],
+  x: #{@x.data},
+  y: #{@y.data},
   line: {simplify: false},
   }]);
 

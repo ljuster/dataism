@@ -12,6 +12,7 @@ class WelcomeController < ApplicationController
 
   def dataviz
     @df = Daru::DataFrame.from_csv("#{Rails.root}/lib/assets/big_west_wbb_2016.csv")
+    @df = @df.sort(['fg_pct'])
     @x = @df['fg_pct']
     @y = @df['overall']
     @reg = Statsample::Regression.simple(@x, @y)
