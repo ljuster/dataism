@@ -1,71 +1,91 @@
 .container
-  %div.row
-    %div#myDiv
   %hr
-    %div.row
-      %div#graph
+  %div.showcase__section#bubble
+    %div.spacer.small
+    %div#bubbleplots
+      %div.bubbleplot{'data-num': 0}
+        %div.plot#plotdiv
+        %div.control-row
+          Statistic:
+          %select.statdata
+
 
 :javascript
-    var data = [
-      {
-        x: #{@x.data},
-        y: #{@y.data},
-        mode: 'markers',
-        name: "Rank by #{@x.name}"
-      }
-    ];
 
-    var layout = {
-      title: 'Big West Women\'s Basketball Statistics',
-      showlegend: true,
-      // to highlight the timestamp we use shapes and create a rectangular
-
-      shapes: [
-        // 1st highlight during Feb 4 - Feb 6
-        {
-          type: 'rect',
-          // x-reference is assigned to the x-values
-          xref: 'x',
-          // y-reference is assigned to the plot paper [0,1]
-          yref: 'paper',
-          x0: #{@x.data.min},
-          y0: #{@y.data.min},
-          x1: #{@x.data.max},
-          y1: #{@y.data.max},
-          fillcolor: '#d3d3d3',
-          opacity: 0.2,
-          line: {
-            width: 0
-          }
-        },
-
-
-      ],
-      height: 500,
-      width: 500
-    }
-
-  Plotly.newPlot('myDiv', data, layout);
-  Plotly.plot('graph', [{
-  x: #{@x.data},
-  y: #{@y.data},
-  line: {simplify: false},
-  }]);
-
-
-  function randomize() {
-    Plotly.animate('graph', {
-      data: [{y: [Math.random(), Math.random(), Math.random()]}],
-      traces: [0],
-      layout: {}
-    }, {
-      transition: {
-        duration: 500,
-        ease: 'cubic-in-out'
-      }
-    })
-    randomize()
+  function unpack(rows) {
+    return rows.map(function(row) {
+      return row;
+    });
   }
 
-  randomize();
+  var allStatNames = unpack(#{@stat_names}),
+    overall = unpack(#{@df['overall'].data}),
+    scoringMargin = unpack(#{@df['scoring_margin'].data}),
+    listofStats = [],
+    currentStat,
+    currentSM = [],
+    currentFGP = [];
+
+  for (var i = 0; i < allStatNames.length; i++) {
+    if (listofStats.indexOf(allStatNames[i]) === -1) {
+      listofStats.push(allStatNames[i]);
+    }
+  }
+
+  function getStatData(chosenStat) {
+    currentStat1 = [];
+    currentStat2 = [];
+    for (var i = 0; i < allStatNames.length; i++) {
+      // if (allStatNames[i] === chosenStat) {
+        currentStat1.push(overall[i]);
+        currentStat2.push(scoringMargin[i]);
+      // }
+    }
+  };
+
+  // Default Stat Data
+  setBubblePlot('scoring_margin');
+
+  function setBubblePlot(chosenStat) {
+    getStatData(chosenStat);
+
+    var trace1 = {
+      x: currentStat1,
+      y: currentStat2,
+      mode: 'markers',
+      marker: {
+        size: 12,
+        opacity: 0.5
+      }
+    };
+
+    var data = [trace1];
+
+    var layout = {
+      title: 'Correlation between<br>' + chosenStat + ' and conference ranking'
+    };
+
+    Plotly.newPlot('plotdiv', data, layout);
+  };
+
+  var innerContainer = document.getElementById('bubble'),
+    plotEl = innerContainer.querySelector('.plot'),
+    teamSelector = innerContainer.querySelector('.statdata');
+
+  function assignOptions(textArray, selector) {
+    for (var i = 0; i < textArray.length; i++) {
+      var currentOption = document.createElement('option');
+      currentOption.text = textArray[i];
+      selector.appendChild(currentOption);
+    }
+  }
+
+  assignOptions(listofStats, teamSelector);
+
+  function updateTeam() {
+    setBubblePlot(teamSelector.value);
+  }
+
+    teamSelector.addEventListener('change', updateTeam, false);
+
 

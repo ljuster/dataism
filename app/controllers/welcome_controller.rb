@@ -15,8 +15,11 @@ class WelcomeController < ApplicationController
     @df = @df.sort(['fg_pct'])
     @x = @df['fg_pct']
     @y = @df['overall']
+    @labels = @df['team_name']
+    @stat_names = @df.data.reject{ |e| e.name == "team_name" || e.name == "overall"}.collect{|e| e.name}
     @reg = Statsample::Regression.simple(@x, @y)
-    render 'shared/dataviz', locals: {daru: @reg, x: @x, y: @y}
+    @cm = Statsample::Bivariate.correlation_matrix(@df)
+    render 'shared/dataviz', locals: {df: @df, x: @x, y: @y, labels: @labels, stat_names: @stat_names}
   end
 
   def github_feed
