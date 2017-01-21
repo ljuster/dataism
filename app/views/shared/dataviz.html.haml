@@ -12,47 +12,41 @@
 
 :javascript
 
-  function unpack(rows) {
+  function unpack(rows, key) {
     return rows.map(function(row) {
       return row;
     });
   }
 
-  var allStatNames = unpack(#{@stat_names}),
-    overall = unpack(#{@df['overall'].data}),
-    scoringMargin = unpack(#{@df['scoring_margin'].data}),
-    listofStats = [],
-    currentStat,
-    currentSM = [],
-    currentFGP = [];
-
-  for (var i = 0; i < allStatNames.length; i++) {
-    if (listofStats.indexOf(allStatNames[i]) === -1) {
-      listofStats.push(allStatNames[i]);
-    }
-  }
+  var allStatNames = unpack(#{@df.data.keys},0);
+  var data = #{@df.data.to_json}
+  var chosenStat = null;
 
   function getStatData(chosenStat) {
     currentStat1 = [];
     currentStat2 = [];
-    for (var i = 0; i < allStatNames.length; i++) {
-      // if (allStatNames[i] === chosenStat) {
-        currentStat1.push(overall[i]);
-        currentStat2.push(scoringMargin[i]);
-      // }
+    for (var i = 0; i < allStatNames.length ; i++) {
+      if (allStatNames[i] === chosenStat) {
+        currentStat1.push(#{@df.data['overall']});
+        currentStat2.push(data[chosenStat]);
+      }
     }
   };
 
   // Default Stat Data
-  setBubblePlot('scoring_margin');
+  if (chosenStat != null){
+      setBubblePlot(chosenStat);
+    }else{
+      setBubblePlot('scoring_margin');
+    }
 
   function setBubblePlot(chosenStat) {
     getStatData(chosenStat);
 
     var trace1 = {
-      x: currentStat1,
-      y: currentStat2,
-      text: #{@labels.data},
+      x: currentStat1[0],
+      y: currentStat2[0],
+      text: #{@df.data['team_name']},
       mode: 'markers',
       marker: {
         size: 12,
@@ -63,7 +57,13 @@
     var data = [trace1];
 
     var layout = {
-      title: 'Correlation between<br>' + chosenStat + ' and conference ranking'
+      title: 'Correlation between<br>' + chosenStat + ' and conference ranking',
+      xaxis: {
+        title: 'Ranking'
+      },
+      yaxis: {
+        title: chosenStat
+        },
     };
 
     Plotly.newPlot('plotdiv', data, layout);
@@ -71,7 +71,7 @@
 
   var innerContainer = document.getElementById('bubble'),
     plotEl = innerContainer.querySelector('.plot'),
-    teamSelector = innerContainer.querySelector('.statdata');
+    statSelector = innerContainer.querySelector('.statdata');
 
   function assignOptions(textArray, selector) {
     for (var i = 0; i < textArray.length; i++) {
@@ -81,12 +81,12 @@
     }
   }
 
-  assignOptions(listofStats, teamSelector);
+  assignOptions(allStatNames, statSelector);
 
-  function updateTeam() {
-    setBubblePlot(teamSelector.value);
+  function updateStat() {
+    setBubblePlot(statSelector.value);
   }
 
-    teamSelector.addEventListener('change', updateTeam, false);
+    statSelector.addEventListener('change', updateStat, false);
 
 

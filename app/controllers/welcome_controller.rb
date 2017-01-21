@@ -11,15 +11,11 @@ class WelcomeController < ApplicationController
   end
 
   def dataviz
-    @df = Daru::DataFrame.from_csv("#{Rails.root}/lib/assets/big_west_wbb_2016.csv")
-    @df = @df.sort(['fg_pct'])
-    @x = @df['fg_pct']
-    @y = @df['overall']
-    @labels = @df['team_name']
-    @stat_names = @df.data.reject{ |e| e.name == "team_name" || e.name == "overall"}.collect{|e| e.name}
-    @reg = Statsample::Regression.simple(@x, @y)
-    @cm = Statsample::Bivariate.correlation_matrix(@df)
-    render 'shared/dataviz', locals: {df: @df, x: @x, y: @y, labels: @labels, stat_names: @stat_names}
+    path = "#{Rails.root}/lib/assets/big_west_wbb_2016.csv"
+    @df = DataFile.new ({path: path})
+    # @reg = Statsample::Regression.simple(@x, @y)
+    # @cm = Statsample::Bivariate.correlation_matrix(@df)
+    render 'shared/dataviz', locals: {data: @df}
   end
 
   def github_feed
