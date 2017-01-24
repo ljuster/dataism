@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
+ruby '2.3.1'
 
 
 #for git archives
@@ -11,10 +11,10 @@ gem 'yajl-ruby', require: 'yajl'
 gem 'statsample'
 
 #for react
-gem 'OptionParser', '~> 0.5.1'
+# gem 'OptionParser'
 
 #for haml
-gem 'haml-rails'
+gem "haml-rails", "~> 0.9"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record

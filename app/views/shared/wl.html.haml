@@ -2,13 +2,18 @@
   %hr
   %div.showcase__section#bubble
     %div.spacer.small
+      %div.ui-icon-circle-minus{style: "color:red;"} Loss
+      %div.ui-icon-circlesmall-plus{style: "color:blue;"} Win
     %div#bubbleplots
       %div.bubbleplot{'data-num': 0}
         %div.plot#plotdiv
         %div.control-row
-          Statistic:
+          Statistic 1:
           %select.statdata
-  %div.alert-link=link_to('win loss analysis',:controller => :welcome, :action => :'win_loss_viz')
+          Statistic 2:
+          %select.statdata2
+  %hr
+  %div.alert-link=link_to('data viz',:controller => :welcome, :action => :'dataviz.html.haml')
 
 :javascript
 
@@ -18,48 +23,54 @@
     });
   }
 
-  var allStatNames = unpack(#{@df.data.keys},0);
-  var data = #{@df.data.to_json}
+  var allStatNames = unpack(#{@df2.data.keys},0);
+  var data = #{@df2.data.to_json}
   var chosenStat = null;
+  var chosenStat2 = null;
 
-  function getStatData(chosenStat) {
+  function getStatData(chosenStat, chosenStat2) {
     currentStat1 = [];
     currentStat2 = [];
     for (var i = 0; i < allStatNames.length ; i++) {
       if (allStatNames[i] === chosenStat) {
-        currentStat1.push(#{@df.data['overall'][:raw]});
-        currentStat2.push(data[chosenStat]['raw']);
+        currentStat1.push(data[chosenStat]['raw']);
+      }
+      if (allStatNames[i] === chosenStat2) {
+        currentStat1.push(data[chosenStat2]['raw']);
       }
     }
   };
 
   // Default Stat Data
   if (chosenStat != null){
-      setBubblePlot(chosenStat);
+      setBubblePlot(chosenStat, chosenStat2);
     }else{
-      setBubblePlot('scoring_margin');
+      setBubblePlot('off_reb', 'turnovers');
     }
 
-  function setBubblePlot(chosenStat) {
-    getStatData(chosenStat);
+
+  function setBubblePlot(chosenStat, chosenStat2) {
+    getStatData(chosenStat, chosenStat2);
 
     var trace1 = {
       x: currentStat1[0],
       y: currentStat2[0],
-      text: #{@df.data['team_name'][:raw]},
+      text: #{@df2.data['opponent'][:raw]},
       mode: 'markers',
+      name: ['win','loss'],
       marker: {
         size: 12,
-        opacity: 0.5
+        opacity: 0.5,
+        color: #{@df2.data['outcome'][:raw]}
       }
     };
 
     var data = [trace1];
 
     var layout = {
-      title: 'Correlation between<br>' + chosenStat + ' and conference ranking',
+      title: 'Correlation between<br>' + chosenStat + ' and ' + chosenStat2,
       xaxis: {
-        title: 'Ranking'
+        title: chosenStat2
       },
       yaxis: {
         title: chosenStat
@@ -70,8 +81,8 @@
   };
 
   var innerContainer = document.getElementById('bubble'),
-    plotEl = innerContainer.querySelector('.plot'),
     statSelector = innerContainer.querySelector('.statdata');
+    statSelector2 = innerContainer.querySelector('.statdata2');
 
   function assignOptions(textArray, selector) {
     for (var i = 0; i < textArray.length; i++) {
@@ -82,11 +93,13 @@
   }
 
   assignOptions(allStatNames, statSelector);
+  assignOptions(allStatNames, statSelector2);
 
   function updateStat() {
-    setBubblePlot(statSelector.value);
+    setBubblePlot(statSelector.value, statSelector2.value);
   }
 
     statSelector.addEventListener('change', updateStat, false);
+    statSelector2.addEventListener('change', updateStat, false);
 
 

@@ -10,12 +10,16 @@ class WelcomeController < ApplicationController
 
   end
 
+  def win_loss_viz
+    path2 = "#{Rails.root}/lib/assets/ucsb.csv"
+    @df2 = DataFile.new ({path: path2, type: "team", corr: true})
+    render 'shared/wl'
+  end
+
   def dataviz
     path = "#{Rails.root}/lib/assets/big_west_wbb_2016.csv"
-    @df = DataFile.new ({path: path})
-    # @reg = Statsample::Regression.simple(@x, @y)
-    # @cm = Statsample::Bivariate.correlation_matrix(@df)
-    render 'shared/dataviz', locals: {data: @df}
+    @df = DataFile.new ({path: path, type: "conference", corr: false})
+    render 'shared/dataviz'
   end
 
   def github_feed
