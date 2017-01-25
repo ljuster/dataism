@@ -8,7 +8,8 @@
         %div.control-row
           Statistic:
           %select.statdata
-  %div.alert-link=link_to('win loss analysis',:controller => :welcome, :action => :'win_loss_viz')
+  - if !@hide
+    %div.alert-link=link_to('win/loss analysis',:controller => :welcome, :action => :'win_loss_viz')
 
 :javascript
 
@@ -70,7 +71,6 @@
   };
 
   var innerContainer = document.getElementById('bubble'),
-    plotEl = innerContainer.querySelector('.plot'),
     statSelector = innerContainer.querySelector('.statdata');
 
   function assignOptions(textArray, selector) {

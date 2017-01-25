@@ -17,7 +17,12 @@ class WelcomeController < ApplicationController
   end
 
   def dataviz
-    path = "#{Rails.root}/lib/assets/big_west_wbb_2016.csv"
+    if params[:conference]=='BW'
+      path = "#{Rails.root}/lib/assets/big_west_wbb_2016.csv"
+    else
+      path = "#{Rails.root}/lib/assets/wac.csv"
+      @hide = true
+    end
     @df = DataFile.new ({path: path, type: "conference", corr: false})
     render 'shared/dataviz'
   end
