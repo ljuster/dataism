@@ -47,7 +47,7 @@ gem 'spring',        group: :development
 gem 'puma'
 
 #image
-gem 'rmagick'
+# gem 'rmagick'
 
 #ui
 gem 'bootstrap-modal-rails'

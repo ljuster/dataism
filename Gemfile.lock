@@ -150,7 +150,6 @@ GEM
       prawn (~> 0.8.4)
       prawn-svg (~> 0.9.1)
       text-table (~> 1.2)
-    rmagick (2.16.0)
     rserve-client (0.3.1)
     ruby-ole (1.2.12)
     ruby_parser (3.8.4)
@@ -217,7 +216,6 @@ DEPENDENCIES
   puma
   rails (= 4.2.5)
   rails_12factor
-  rmagick
   sass-rails (~> 5.0.3)
   sdoc (~> 0.4.0)
   spring
@@ -230,4 +228,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.5
+   1.16.5

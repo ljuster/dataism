@@ -17,7 +17,7 @@
 
 # Ignore ruby-version
 /.ruby-version
-
+/vendor
 # .idea and DS_Store
 .idea/*
 app/.DS_Store
