@@ -1,7 +1,7 @@
 .jumbotron.text-center
   .container
     %a.lang-logo{:href=> "/"}
-      %img{:src=>asset_path('lang-logo.png')}
+      %img{:src=>'assets/lang-logo.png'}
     %h1 Creative expression, learning, data, connection
     %button.btn.btn-lg.btn-default=link_to('Gallery',:controller => :welcome, :action => :gallery)
     %div.btn-group
@@ -14,18 +14,18 @@
     %button.btn.btn-lg.btn-default=link_to('Coding Interview Prep',:controller => :welcome, :action => :interview_prep)
 .container
   .row{:style=> "padding: 10px;text-align:center;background-color:black"}
-    %img{:src=>asset_path('mona.jpg'), :alt=>"Card image cap", :style=>"max-width:300px;max-height:280px"}
-    %img{:src=>asset_path('monaLJ.png'), :alt=>"Card image cap", :style=>"max-width:400px;max-height:280px"}
-    %img{:src=>asset_path('monaPix.jpg'), :alt=>"Card image cap", :style=>"max-width:300px;max-height:280px"}
+    %img{:src=>'assets/mona.jpg', :alt=>"Card image cap", :style=>"max-width:300px;max-height:280px"}
+    %img{:src=>'assets/monaLJ.png', :alt=>"Card image cap", :style=>"max-width:400px;max-height:280px"}
+    %img{:src=>'assets/monaPix.jpg', :alt=>"Card image cap", :style=>"max-width:300px;max-height:280px"}
     %hr
   .row{:style=> "padding: 10px;text-align:center;background-color:black"}
     %div#graph2
   .row{:style=>"padding: 10px;text-align:center;background-color:black;"}
-    %img{:src=> asset_path('1.jpg'), :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
-    %img{:src=> asset_path('3.jpg'), :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
-    %img{:src=> asset_path('4.jpg') , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
-    %img{:src=> asset_path('7.jpg') , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
-    %img{:src=> asset_path('8.jpg') , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
+    %img{:src=> 'assets/1.jpg', :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
+    %img{:src=> 'assets/3.jpg', :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
+    %img{:src=> 'assets/4.jpg' , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
+    %img{:src=> 'assets/7.jpg' , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
+    %img{:src=> 'assets/8.jpg' , :alt=>"Card image cap", :style=>'max-width:200px;max-height:280px'}
 
 :javascript
   var n = 100;
