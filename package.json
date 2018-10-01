@@ -1,0 +1,18 @@
+{
+  "name": "resortpass",
+  "private": true,
+  "engines": {
+    "node": "10.9.0",
+    "yarn": "1.9.4"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
+  "scripts": {
+    "postinstall": "cd client && yarn"
+  },
+  "dependencies": {
+    "nps": "^5.9.3"
+  }
+}

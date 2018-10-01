@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.4.4'
+ruby '2.4.1'
 
 
 #for git archives
@@ -61,4 +61,7 @@ gem 'dropzonejs-rails'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+# React on Rails
+gem "react_on_rails", "11.1.3"
+gem "webpacker"
+gem 'mini_racer', "0.2.1"
