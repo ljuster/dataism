@@ -81,5 +81,8 @@ module.exports = {
       path.resolve(__dirname, '..', 'node_modules'),
     ],
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    modulesDirectories: [
+         'node_modules'
+       ] 
   },
 };
