@@ -5,10 +5,10 @@ scripts:
     prod:
       default:
         description: Build client and server bundles for production env.
-        script: nps build.bs && concurrently --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.prod.client" "nps build.prod.server"
+        script: concurrently --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.prod.client" "nps build.prod.server"
       watch:
         description: Build client and server bundles for production env (watch mode enabled).
-        script: nps build.bs && concurrently --kill-others --prefix "[{name}]" -c "bgBlue.bold,bgMagenta.bold,bgGreen.bold" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.prod.client.watch" "nps build.prod.server.watch"
+        script: concurrently --kill-others --prefix "[{name}]" -c "bgBlue.bold,bgMagenta.bold,bgGreen.bold" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.prod.client.watch" "nps build.prod.server.watch"
       client:
         default:
           description: Build client bundles for production env.
