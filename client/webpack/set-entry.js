@@ -1,7 +1,7 @@
 const _ = require('lodash/fp');
 
 const entries = {
-  'hello-world': './app/bundles/HelloWorld/hello-world-bundle',
+  // 'hello-world': './app/bundles/HelloWorld/hello-world-bundle',
   'result-page': './app/bundles/ResultPage/index',
   'global': './app/bundles/global/index',
 };

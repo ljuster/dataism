@@ -2,4 +2,4 @@
 
 import '@babel/polyfill';
 
-import './app/bundles/HelloWorld/hello-world-bundle';
+// import './app/bundles/HelloWorld/hello-world-bundle';
