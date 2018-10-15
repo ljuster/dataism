@@ -1,5 +1,5 @@
 {
-  "name": "leoraj",
+  "name": "leoraju",
   "private": true,
   "engines": {
     "node": "10.9.0",
@@ -29,8 +29,11 @@
     "compression-webpack-plugin": "^2.0.0",
     "concurrently": "^4.0.1",
     "emotion": "^9.2.10",
+    "facepaint": "^1.2.1",
+    "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.4.3",
+    "moment": "^2.22.2",
     "node-sass": "^4.9.3",
     "nps": "^5.9.3",
     "prop-types": "^15.6.2",
@@ -38,6 +41,8 @@
     "re-classnames": "^3.0.0",
     "re-debouncer": "^0.0.1",
     "react": "^16.5.2",
+    "react-autocomplete": "^1.8.1",
+    "react-datepicker": "^1.6.0",
     "react-dom": "^16.5.2",
     "react-emotion": "^9.2.10",
     "react-on-rails": "11.1.3",

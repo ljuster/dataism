@@ -1,0 +1,52 @@
+<!-- Microdata markup added by Google Structured Data Markup Helper. -->
+<html lang="en" xmlns="https://www.w3.org/1999/xhtml">
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en">
+
+  <head>
+    <title><%= yield(:title) %></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="ResortPass- Book a Resort Day Pass- starting at only $25"/>
+    <meta property="og:description" content="Book a day pass, spa pass, or cabana at a resort for the pool and spa starting at only $25. #daycation"/>
+    <meta property="og:url" content="https://www.resortpass.com/"/>
+    <meta property="og:site_name" content="ResortPass"/>
+    <meta property="og:image" content="http://www.resortpass.com/assets/shutterstock_567052507.jpg"/>
+    <meta property="og:image:width" content="6173"/>
+    <meta property="og:image:height" content="4000"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:description" content="Book a day pass, spa pass, or cabana at a resort for the pool and spa starting at only $25. #daycation"/>
+    <meta name="twitter:title" content="ResortPass- Book a Resort Day Pass- starting at only $25"/>
+    <meta name="twitter:image" content="http://www.resortpass.com/assets/shutterstock_567052507.jpg"/>
+    <%= favicon_link_tag 'fav.ico' %>
+    <%= csrf_meta_tags %>
+    <%= include_webpack_bundle("global") %>
+    <%= include_webpack_bundle_js("common") %>
+    <%= yield :head %>
+
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+    <!-- Google Tag Manager -->
+     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     })(window,document,'script','dataLayer','GTM-PJL26JQ');
+
+    </script>
+   <!-- End Google Tag Manager -->
+
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJL26JQ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <%= yield %>
+  </body>
+</html>

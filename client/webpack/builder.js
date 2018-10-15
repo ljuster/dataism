@@ -15,18 +15,18 @@ const setStats = require('./set-stats');
 const setWatchOptions = require('./set-watch-options');
 
 module.exports = builderConfig =>
-    _.flow(
-        setMode(builderConfig),
-        setEntry(builderConfig),
-        setOutput(builderConfig),
-        setContext(builderConfig),
-        setDevtool(builderConfig),
-        setModule(builderConfig),
-        setPerformance(builderConfig),
-        setOptimization(builderConfig),
-        setPlugins(builderConfig),
-        setResolve(builderConfig),
-        setExternals(builderConfig),
-        setStats(builderConfig),
-        setWatchOptions(builderConfig),
-    )({});
+  _.flow(
+    setMode(builderConfig),
+    setEntry(builderConfig),
+    setOutput(builderConfig),
+    setContext(builderConfig),
+    setDevtool(builderConfig),
+    setModule(builderConfig),
+    setPerformance(builderConfig),
+    setOptimization(builderConfig),
+    setPlugins(builderConfig),
+    setResolve(builderConfig),
+    setExternals(builderConfig),
+    setStats(builderConfig),
+    setWatchOptions(builderConfig),
+  )({});

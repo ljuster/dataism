@@ -49,4 +49,28 @@ class WelcomeController < ApplicationController
     render 'welcome/about'
   end
 
+  def result2
+    # result
+    @selected_city = nil
+    @selected_state = nil
+    @selected_date = nil
+
+    if params[:xcity_id].present?
+      # @selected_city = CitiesExtended.find_by_id(params[:xcity_id])
+      cookies[:selected_city] = params[:xcity_id]
+    elsif params[:state].present?
+      # @selected_state = State.find_by_code(params[:state])
+    elsif cookies[:selected_city].present?
+      # @selected_city = CitiesExtended.find_by_id(params[:selected_city])
+    end
+
+    if params[:date].present?
+      @selected_date = params[:date]
+    elsif cookies[:selected_date].present?
+      @selected_date = cookies[:selected_date]
+    end
+
+    render layout: 'react_application'
+  end
+
 end

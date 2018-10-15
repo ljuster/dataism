@@ -23,4 +23,6 @@ S /Users/leorajuster/Desktop/repos/dataism/client/node_modules/bs-storybook/lib/
 B /Users/leorajuster/Desktop/repos/dataism/client/node_modules/bs-storybook/lib/ocaml
 S /Users/leorajuster/Desktop/repos/dataism/client/node_modules/bs-react-on-rails/lib/ocaml
 B /Users/leorajuster/Desktop/repos/dataism/client/node_modules/bs-react-on-rails/lib/ocaml
+S app/bundles/HelloWorld/HelloReason/components
+B lib/bs/app/bundles/HelloWorld/HelloReason/components
 ####BSB GENERATED: NO EDIT}

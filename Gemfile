@@ -59,6 +59,8 @@ gem 'dropzonejs-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem "slim-rails"
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 # React on Rails

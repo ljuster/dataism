@@ -1,1 +1,0 @@
-module.exports = ['./app/styleguide/styles/colors/index.scss', './app/styleguide/styles/misc/variables.scss'];
