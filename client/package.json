@@ -32,6 +32,7 @@
     "concurrently": "^4.0.1",
     "emotion": "^9.2.10",
     "emotion-server": "^9.2.12",
+    "event-stream": "^4.0.1",
     "facepaint": "^1.2.1",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
