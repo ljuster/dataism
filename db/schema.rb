@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,88 +10,89 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114230811) do
+ActiveRecord::Schema.define(version: 20181202173524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "algorithms", force: :cascade do |t|
-    t.string   "name"
-    t.string   "input"
-    t.integer  "runtime"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.boolean  "isPalindrome"
-    t.string   "output"
-  end
-
-  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
-    t.string   "value"
+  create_table "algorithms", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "input"
+    t.integer "runtime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "isPalindrome"
+    t.string "output"
   end
 
-  create_table "archives", force: :cascade do |t|
-    t.string  "name",  limit: 200
+  create_table "archives", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 200
     t.integer "count"
   end
 
-  create_table "data_collections", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "year"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "data_files", force: :cascade do |t|
-    t.string   "name"
+  create_table "data_collections", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.string   "image_url"
-    t.decimal  "price"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "data_files", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "purchases", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "description"
-    t.string   "image"
+  create_table "images", force: :cascade do |t|
+    t.text "description"
+    t.string "name"
+    t.string "url"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "image_url"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "purchases", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "description"
+    t.string "image"
     t.datetime "purchase_date"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "records", force: :cascade do |t|
-    t.text     "data"
-    t.integer  "data_file_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "records", id: :serial, force: :cascade do |t|
+    t.text "data"
+    t.integer "data_file_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_file_id"], name: "index_records_on_data_file_id"
   end
 
-  add_index "records", ["data_file_id"], name: "index_records_on_data_file_id", using: :btree
-
-  create_table "variables", force: :cascade do |t|
-    t.string   "name"
-    t.string   "type"
-    t.integer  "data_file_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "variables", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.integer "data_file_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_file_id"], name: "index_variables_on_data_file_id"
   end
 
-  add_index "variables", ["data_file_id"], name: "index_variables_on_data_file_id", using: :btree
-
-  create_table "widgets", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "stock"
+  create_table "widgets", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "stock"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

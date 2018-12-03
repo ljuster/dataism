@@ -226,23 +226,6 @@ class ResultPage extends React.Component<Props, State> {
             state={this.state.showLocationNotFound === 'state' ? this.state.selected_state : null}
           />
           {this.state.hotels.length === 0 && <div>Loading</div>}
-          {this.state.hotels.length !== 0 && (
-            this.state.hotels.map(elem => {
-              const location = `${elem.city_name}, ${elem.state_name}`;
-
-              if (this.lastLocationTitle !== location) {
-                this.lastLocationTitle = location;
-                return (
-                    <HotelDetails {...elem} key={elem.url} locationTitle={location} />
-                )
-              }
-
-              return (
-                <HotelDetails {...elem} key={elem.url} />
-              )
-            }
-            ))
-          }
         </Container>
       </>
     )

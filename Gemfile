@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.1'
 
-
+# gem 'nokogiri',  '>= 1.8.5'
 #for git archives
 gem 'yajl-ruby', require: 'yajl'
 # gem 'open-uri'

@@ -1,9 +1,8 @@
 const _ = require('lodash/fp');
 
 const entries = {
-  // 'hello-world': './app/bundles/HelloWorld/hello-world-bundle',
-  'result-page': './app/bundles/ResultPage/index',
-  'global': './app/bundles/global/index',
+    'app': './app/bundles/App/client',
+    'global': './app/bundles/global/index',
 };
 
 function setEntry(builderConfig, webpackConfig) {

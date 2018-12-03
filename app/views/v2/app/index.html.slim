@@ -1,0 +1,14 @@
+- content_for(:title, "Search results")
+- provide :head
+  = include_webpack_bundle("app")
+
+- result = react_component_hash("App", prerender: true, props: calc_props)
+
+/ # TODO: add react-helmet
+/ - content_for :title_tag do
+/   - react_helmet_app['title'] %>
+/
+/ - content_for :meta_tags do
+/   - react_helmet_app['meta_tags']
+
+= result['componentHtml']

@@ -1,7 +1,6 @@
 scripts:
 
   build:
-    bs: bsb -clean-world -make-world
     prod:
       default:
         description: Build client and server bundles for production env.
@@ -26,10 +25,10 @@ scripts:
     dev:
       default:
         description: Build client and server bundles for dev env.
-        script: nps build.bs && concurrently --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.dev.client" "nps build.dev.server"
+        script: concurrently --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.dev.client" "nps build.dev.server"
       watch:
         description: Build client and server bundles for dev env (watch mode enabled).
-        script: nps build.bs && concurrently --kill-others -c "bgBlue.bold,bgMagenta.bold,bgGreen.bold" --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.dev.client.watch" "nps build.dev.server.watch"
+        script: concurrently --kill-others -c "bgBlue.bold,bgMagenta.bold,bgGreen.bold" --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.dev.client.watch" "nps build.dev.server.watch"
       client:
         default:
           description: Build client bundles for dev env.
@@ -47,10 +46,10 @@ scripts:
     rspec:
       default:
         description: Build client and server bundles for RSpec tests.
-        script: nps build.bs && concurrently --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.rspec.client" "nps build.rspec.server"
+        script: concurrently --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.rspec.client" "nps build.rspec.server"
       watch:
         description: Build client and server bundles for RSpec tests (watch mode enabled).
-        script: nps build.bs && concurrently --kill-others --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.rspec.client.watch" "nps build.rspec.server.watch"
+        script: concurrently --kill-others --prefix "[{name}]" --names "CLIENT_BUNDLES,SERVER_BUNDLE" "nps build.rspec.client.watch" "nps build.rspec.server.watch"
       client:
         default:
           description: Build client bundles for RSpec env.
@@ -106,7 +105,7 @@ scripts:
   storybook:
     default: nps storybook.js
     js: start-storybook -p 6006 -c .storybook
-    re: nps build.bs && start-storybook -p 6006 -c app/reason/.storybook
+    re: start-storybook -p 6006 -c app/reason/.storybook
 
   up:
     default:
@@ -117,7 +116,6 @@ scripts:
       script: trash node_modules && yarn cache clean && yarn install
 
   clear:
-    bs: bsb -clean-world
     prod:
       default:
         description: Clear all webpack bundles and assets from `public/webpack/production`
