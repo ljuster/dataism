@@ -1,7 +1,0 @@
-- content_for(:title, "Search results")
-- provide :head
-  = include_webpack_bundle("result-page")
-
-- props = render(template: "welcome/result_json.json")
-
-= react_component("ResultPage", prerender: false, props: props)

@@ -10,42 +10,42 @@ const builder = require('./webpack/builder');
  * sourceMaps: ?string - webpack's 'devtool' setting, renamed for clarity
  */
 const BUILDER_CONFIGS = {
-  dev: {
-    developerAids: true,
-    extractCss: true,
-    sourceMaps: 'eval',
-    debug: false,
-  },
+    dev: {
+        developerAids: true,
+        extractCss: true,
+        sourceMaps: 'cheap-module-source-map',
+        debug: false,
+    },
 
-  serverBundleDev: {
-    developerAids: true,
-    serverRendering: true,
-    sourceMaps: 'eval',
-  },
+    serverBundleDev: {
+        developerAids: true,
+        serverRendering: true,
+        sourceMaps: 'eval',
+    },
 
-  prod: {
-    extractCss: true,
-    optimize: true,
-    sourceMaps: 'source-map',
-  },
+    prod: {
+        extractCss: true,
+        optimize: true,
+        sourceMaps: 'source-map',
+    },
 
-  serverBundleProd: {
-    optimize: false,
-    serverRendering: true,
-    sourceMaps: 'source-map',
-  },
+    serverBundleProd: {
+        optimize: false,
+        serverRendering: true,
+        sourceMaps: 'source-map',
+    },
 
-  rspec: {
-    developerAids: true,
-    extractCss: true,
-    sourceMaps: false,
-  },
+    rspec: {
+        developerAids: true,
+        extractCss: true,
+        sourceMaps: false,
+    },
 
-  serverBundleRspec: {
-    developerAids: true,
-    serverRendering: true,
-    sourceMaps: 'eval',
-  },
+    serverBundleRspec: {
+        developerAids: true,
+        serverRendering: true,
+        sourceMaps: 'eval',
+    },
 };
 
 module.exports = (env = 'prod') => builder(BUILDER_CONFIGS[env]);

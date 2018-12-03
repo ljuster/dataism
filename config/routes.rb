@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :images
   resources :records
   resources :variables
   resources :archives
@@ -10,7 +11,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  get '/results2', to: 'welcome#result2', as: 'results2'
+  namespace :v2 do
+    get '(/*react_route)', to: 'app#index'
+  end
 
   root 'welcome#index'
   get '/welcome/:action', controller: 'welcome'

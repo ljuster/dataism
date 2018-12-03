@@ -3,7 +3,7 @@
 #   Tab 1: `foreman start -f Procfile.dev -m puma=0,all=1`
 #   Tab 2: `rails s webrick`
 puma: PORT=3000 bundle exec puma -C config/puma.rb
-webpack: cd client && nps build.dev.watch
+webpack: cd client && yarn start build.dev.watch
 # sidekiq: bundle exec sidekiq -C config/sidekiq.yml
 # TODO: put back in when turning on renderer
 # renderer: cd client && yarn start renderer -p 3800
