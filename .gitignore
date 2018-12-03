@@ -29,6 +29,7 @@ app/assets/images/.DS_Store
 # Webpack
 /public/webpack
 node_modules
+/client/node_modules
 yarn-debug.log*
 .yarn-integrity
 yarn-error.log
