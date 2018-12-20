@@ -20,4 +20,4 @@ else
   json.selected_date selected_date
 end
 
-json.hotels 'asdf'
+json.hotels []

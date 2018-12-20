@@ -67,3 +67,10 @@ gem "slim-rails"
 gem "react_on_rails", "11.1.3"
 gem "webpacker"
 gem 'mini_racer', "0.2.1"
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+end

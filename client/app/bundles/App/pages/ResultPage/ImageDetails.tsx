@@ -2,68 +2,9 @@ import * as React from 'react';
 import { css } from 'emotion';
 import styled from 'react-emotion';
 import mq from 'styleguide/styles/layout/media-queries';
-import Icon from 'styleguide/components/Icon/Icon';
 import Button from 'styleguide/components/Button/Button';
 import { Col, Row } from 'styleguide/components/Layout';
-import { Hotel, Product } from './types';
-
-const Price = (props: Product) => (
-  <div className={css`
-    display: flex;
-    flex-direction: column;
-    text-transform: uppercase;
-    text-align: center;
-
-    font-family: 'ProximaNova-regular';
-    font-size: 14px;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 25px;
-    color: #848484;
-    font-weight: 600;
-    width: 33.33%;
-    flex-basis: 33.33%;
-    padding-bottom: 10px;
-
-    .title {
-      font-weight: 600;
-      letter-spacing: 1px !important;
-      font-size: 15px !important;
-      color: #4c4c4c !important;
-      margin-bottom: 3px !important;
-    }
-
-    .starting-at {
-      display: none;
-      font-weight: 100;
-      font-family: proximaNova-light !important;
-      font-size: .8em !important;
-      letter-spacing: 1px !important;
-      color: #000;
-      margin-bottom: 5px;
-
-      ${mq.large(css`
-        display: block;
-      `)}
-    }
-
-    .price {
-      font-size: 25px;
-      font-family: 'ProximaNova-light';
-      color: #4a4a4a;
-      font-weight: normal;
-      display: block;
-
-      ${mq.large(css`
-        font-size: 35px;
-      `)}
-    }
-  `}>
-    <div className="title">{props.name}</div>
-    <div className="starting-at">starting at</div>
-    <div className="price">{`$${props.product_price}`}</div>
-  </div>
-)
+import { Hotel } from './types';
 
 const Wrapper = styled('div')`
     display: flex;
@@ -153,7 +94,6 @@ const Title = props => (
     }
   `}>
     <div className="name">{props.name}</div>
-    <div className="location">{`${props.city_name}, ${props.code}`}</div>
   </div>
 );
 
@@ -162,30 +102,20 @@ const Description = styled('p')`
     font-size: 15px;
     line-height: 1.5;
 `
-const IconStyled = (props) => <Icon code={props.code} className={css`margin-right: 10px`} />
-
-const Amenities = ({ amenities, url }:{ amenities: Array<string>, url: string }) => (
-  <>
-    {amenities.map(elem => (
-      <IconStyled code={elem} key={`amen-${url}-${elem}`} />
-    ))}
-  </>
-)
 
 interface Props extends Hotel {
   locationTitle?: string
 }
 
-const HotelDetails = (props: Props) => (
+const ImageDetails = (props: Props) => (
   <>
   {!!props.locationTitle && <LocationTitle>{props.locationTitle}</LocationTitle>}
   <Wrapper>
     {/* TODO: remove base url */}
-    <Image url={`https://resortpass.com/${props.image}`} />
+    <Image url={props.url} />
     <Content>
-      <Title name={props.name} code={props.code} city_name={props.city_name} />
-      <Amenities amenities={props.amenities} url={props.url} />
-      <Description>{props.short_description}</Description>
+      <Title name={props.name} code={`props.code`} city_name={`props.city_name`} />
+      <Description>{`props.short_description`}</Description>
       <Row className={css`
         flex-direction: column;
         ${mq.medium(css`
@@ -203,9 +133,6 @@ const HotelDetails = (props: Props) => (
             justify-content: flex-start;
           `)}
         `}>
-        {props.products
-            .filter(elem => !!elem.name && !!elem.product_price)
-            .map(elem => <Price {...elem} key={`price-${props.url}-${elem.name}`} />)}
         </Col>
         <Col className={css`
           flex-basis: auto;
@@ -237,4 +164,4 @@ const HotelDetails = (props: Props) => (
   </>
 )
 
-export default HotelDetails
+export default ImageDetails

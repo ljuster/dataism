@@ -19,26 +19,28 @@ interface Props {
 const LayoutHeader = ({ SecondRowComponent }: Props)=> (
   <Header>
     <Container fluid={true} className={css`
-      height: 55px !important;
-      background-color: #21b3d1 !important;
+      height: 55px;
+      background-color: #eec8c8;
       z-index:1000;
       display: flex;
       align-items: center;
     `}>
     <Row>
-        <Col width="50%">
-          <img src="/assets/logo.png" className={css`
-            max-width: 160px;
+        <Col >
+          <img src="/assets/83.png" className={css`
+            max-width: 60px;
+            box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
           `} />
-        </Col>
-        <Col width="50%">
-        </Col>
+            <h2 className={css`
+            align-items: center;
+            font-color: white;
+            `}>Leora C. Juster</h2></Col>
     </Row>
     </Container>
     {!!SecondRowComponent && (
        <Container fluid={true} className={css`
-        height: 55px !important;
-        background-color: #fff !important;
+        height: 55px;
+        background-color: #fff;
         box-shadow: 2px 10px 31px -5px rgba(0, 0, 0, 0.13);
         display: flex;
         align-items: center;

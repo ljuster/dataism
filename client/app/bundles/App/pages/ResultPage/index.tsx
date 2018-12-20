@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Container from 'styleguide/components/Layout/Container';
-import HotelDetails from './HotelDetails';
+import ImageDetails from './ImageDetails';
 import api from 'lib/api/apiCall';
 import { Hotel, CountryState, City, isCountryState } from './types'
 import LayoutHeader from './LayoutHeader';
@@ -103,50 +103,12 @@ class ResultPage extends React.Component<Props, State> {
   }
 
   public fetchHotels() {
-    const { selected_city, selected_state, selected_date } = this.state
-    const date = !!selected_date ? moment(selected_date).format('MM/DD/YYYY') : null
-    let showLocationNotFound = null
 
-    this.setState({
-      hotels: [],
-      showLocationNotFound: null,
-    }, () => {
-      if (!!selected_city && !!selected_city.city) {
-        api.get(`/hotel_search`, { city: selected_city.city, date }).then((result: Array<Hotel>) => {
-          if (result.length > 0) {
-            if (result[0].city_name !== selected_city.city) {
-              showLocationNotFound = 'city'
-            }
-          }
-          this.setState({
-            hotels: result,
-            showLocationNotFound
-          })
-        })
-        return;
-      }
-
-      if (!!selected_state && !!selected_state.code) {
-        api.get(`/hotel_search`, { state: selected_state.code, date }).then((result: Array<Hotel>) => {
-          if (result.length > 0) {
-            if (result[0].state_name !== selected_state.name) {
-              showLocationNotFound = 'state'
-            }
-          }
-          this.setState({
-            hotels: result,
-            showLocationNotFound
-          })
-        })
-        return;
-      }
-
-      api.get(`/hotel_search`, { date }).then((result: Array<Hotel>) => {
+      api.get(`/images`, { }).then((result: Array<Hotel>) => {
         this.setState({
           hotels: result
         })
       })
-    })
   }
 
   public parseUrl(): parseUrlResults {
@@ -226,6 +188,12 @@ class ResultPage extends React.Component<Props, State> {
             state={this.state.showLocationNotFound === 'state' ? this.state.selected_state : null}
           />
           {this.state.hotels.length === 0 && <div>Loading</div>}
+            {this.state.hotels.length !== 0 && (
+                this.state.hotels.map(elem => {
+                    return (
+                        <ImageDetails {...elem} key={elem.url} />
+                    )
+                }))}
         </Container>
       </>
     )

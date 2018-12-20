@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
   def win_loss_viz
     path2 = "#{Rails.root}/lib/assets/ucsb.csv"
     @df2 = DataFile.new ({path: path2, type: "team", corr: true})
-    render 'shared/wl'
+ der 'shared/wl'
   end
 
   def dataviz

@@ -5,15 +5,7 @@ export interface Product {
 }
 
 export interface Hotel {
-  active: boolean 
-  amenities: Array<string>
-  city_name: string
-  code: string
-  image: string
   name: string
-  products: Array<Product>
-  short_description: string
-  state_name: string
   url: string
 }
 

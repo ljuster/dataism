@@ -4,7 +4,14 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    img_arr = []
+
+    Dir.foreach("public/images") do |fname|
+      next if fname[0] == '.'
+      img_arr << { name: fname, url: image_url(fname) }
+    end
+
+    render json: img_arr
   end
 
   # GET /images/1
