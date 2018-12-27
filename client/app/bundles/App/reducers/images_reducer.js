@@ -1,7 +1,7 @@
 import * as actions from './actions'
 
 
-export default function(state = {}, action) {
+export default function(state = {images: []}, action) {
     const { type, payload } = action
 
     switch (type) {

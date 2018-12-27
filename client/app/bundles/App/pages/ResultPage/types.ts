@@ -1,10 +1,4 @@
-export interface Product {
-  name: string
-  quantity?: number
-  product_price: number
-}
-
-export interface Hotel {
+export interface Image {
   name: string
   url: string
 }

@@ -30,11 +30,11 @@ const LayoutHeader = ({ SecondRowComponent }: Props)=> (
           <img src="/assets/83.png" className={css`
             max-width: 60px;
             box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-          `} />
+          `} /></Col>
             <h2 className={css`
-            align-items: center;
-            font-color: white;
-            `}>Leora C. Juster</h2></Col>
+            color: rgba(0,0,0,0.2);
+            margin-left: 50px;
+            `}>Leora C. Juster</h2>
     </Row>
     </Container>
     {!!SecondRowComponent && (

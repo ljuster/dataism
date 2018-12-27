@@ -1,34 +1,44 @@
 import api from '../../../lib/api/apiCall'
+import {
+    FETCH_IMAGES_REQUEST,
+    FETCH_IMAGES_SUCCESS,
+    FETCH_IMAGES_FAILURE
+} from '../constants/images'
 
-export const FETCH_IMAGES_REQUEST = 'FETCH_IMAGES_REQUEST'
-export const FETCH_IMAGES_SUCCESS = 'FETCH_IMAGES_SUCCESS'
-// checkout reducer
-export const ADD_TO_CART = 'ADD_TO_CART'
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 
-export function fetchImages() {
-    console.log("got to getchImagesRequest")
-
-    return function(dispatch) {
-        console.log("got to getchImagesRequest")
-        dispatch({ type: FETCH_IMAGES_REQUEST, payload: {} })
-
-        return api.get(`/images`, { }).then(
-            (response) => {
-                console.log("got inside api of getchimagesrequest")
-                dispatch(fetchImagesSuccess(response.data))
-            })
-            .catch(error => {
-                throw(error)
-            });
-    };
-};
+export const fetchImagesRequest = () => {
+    return {
+        type: FETCH_IMAGES_REQUEST,
+        payload: {}
+    }
+}
 
 export const fetchImagesSuccess = (images) => {
-    return (dispatch) => {
-        dispatch({
-            type: 'FETCH_IMAGES_SUCCESS',
-            images: images
+    return {
+        type: FETCH_IMAGES_SUCCESS,
+        payload: { images: images }
+    }
+}
+
+export const fetchImagesFailure = (images) => {
+    return {
+        type: FETCH_IMAGES_SUCCESS,
+        payload: {images: images }
+    }
+}
+
+export function fetchImages() {
+    return function(dispatch) {
+        dispatch(fetchImagesRequest)
+
+        api.get(`/images`, { }).then(
+            response => dispatch(fetchImagesSuccess(response))
+        )
+        .catch(error => {
+            dispatch({
+                type: FETCH_IMAGES_FAILURE,
+                payload: { error: error }
+            })
         })
     }
-};
+}

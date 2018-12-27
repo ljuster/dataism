@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import Container from 'styleguide/components/Layout/Container'
 import ImageDetails from './ImageDetails'
-import { Hotel, CountryState, City, isCountryState } from './types'
+import { Image, CountryState, City, isCountryState } from './types'
 import LayoutHeader from './LayoutHeader'
 import Filter from './Filter'
 import * as moment from 'moment'
@@ -16,8 +16,6 @@ import {
 } from '../../actions/images'
 
 interface State {
-  hotels: Hotel[]
-  images: Hotel[]
   selected_state: CountryState | null
   selected_city: City | null
   selected_date: moment.Moment | null
@@ -25,13 +23,11 @@ interface State {
 }
 
 export interface ResultPageProps {
-  hotels: Hotel[] | null
-  images: Hotel[] | null
+  images: Image[] | null
   selected_state: CountryState | null
   selected_city: City | null
   selected_date: string | null
   fetchImages: any
-  load: any
 }
 
 interface Props extends ResultPageProps, RouteComponentProps {}
@@ -54,20 +50,17 @@ interface parseUrlResults {
 class ResultPage extends React.Component<Props, State> {
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      images: props.images || [],
-      hotels: props.hotels || [],
       selected_state: props.selected_state,
       selected_city: props.selected_city,
       selected_date: !!props.selected_date ? moment(props.selected_date, 'MM/DD/YYYY') : null,
-      showLocationNotFound: null,
+      showLocationNotFound: null
     }
   }
 
   public componentDidMount() {
-      console.log("comp did mnt index res pg")
       this.props.fetchImages()
   }
 
@@ -80,6 +73,7 @@ class ResultPage extends React.Component<Props, State> {
 
   public parseUrl(): parseUrlResults {
     const parsedQuery: ParsedQuery = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
+
     return {
       selected_city: parsedQuery.xcity_id ? { city: parsedQuery.city_name, id: parsedQuery.xcity_id, state_code: parsedQuery.city_state } : null,
       selected_state: parsedQuery.state ? { code: parsedQuery.state, name: parsedQuery.state_name, active: null, id: 0 } : null,
@@ -150,13 +144,10 @@ class ResultPage extends React.Component<Props, State> {
         <Container className={css`
           margin-top: 145px
         `}>
-          {this.state.hotels.length === 0 && <div>Loading</div>}
-            {this.state.hotels.length > 1 && (
-                this.state.hotels.map(elem => {
-                    return (
-                        <ImageDetails {...elem} key={elem.url} />
-                    )
-                }))}
+          { this.props.images.length === 0 && <div>Loading</div>}
+            {this.props.images.length > 0 &&
+                this.props.images.map(elem => <ImageDetails {...elem} key={elem.url} />)
+            }
         </Container>
       </>
     )
@@ -166,8 +157,7 @@ class ResultPage extends React.Component<Props, State> {
 const mapStateToProps = (state) => {
     return ({
         // DONT DO THIS - USE RESELECT!
-        hotels: state.images,
-        images: state.images
+        images: state.images.images || []
     })
 }
 
