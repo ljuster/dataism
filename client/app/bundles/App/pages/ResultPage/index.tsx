@@ -1,50 +1,21 @@
-import * as React from 'react';
-import Container from 'styleguide/components/Layout/Container';
-import ImageDetails from './ImageDetails';
-import api from 'lib/api/apiCall';
-import { Hotel, CountryState, City, isCountryState } from './types'
-import LayoutHeader from './LayoutHeader';
-import Filter from './Filter';
-import * as moment from 'moment';
-import Cookies from 'js-cookie';
-import { css } from 'emotion';
-import { RouteComponentProps } from 'react-router-dom';
-import qs from 'qs';
-
-
-interface NotFoundProps {
-  state?: CountryState
-  city?: City
-}
-
-const NotFound = (props: NotFoundProps) => {
-  let caption = null
-  if (!!props.city) {
-    caption = `Here are the  nearest hotels  to ${props.city.city}.  Totally worth  the trip for  a relaxing  daycation!`
-  }
-
-  if (!!props.state) {
-    caption = `Here are hotels located within ${props.state.name}. Totally worth the trip for a relaxing daycation!`
-  }
-
-  if (caption === null) return null
-
-  return <div className={css`
-              padding: 35px;
-              color: #262626;
-              font-family: 'ProximaNova-light';
-              font-size: 22px;
-              text-align: center;
-              margin-top: 0px !important;
-              margin-bottom: 50px !important;
-              max-width: 1024px;
-              margin: auto;
-              width: 100%;
-          `}>{caption}</div>
-}
+import * as React from 'react'
+import { connect } from 'react-redux'
+import Container from 'styleguide/components/Layout/Container'
+import ImageDetails from './ImageDetails'
+import { Image, CountryState, City, isCountryState } from './types'
+import LayoutHeader from './LayoutHeader'
+import Filter from './Filter'
+import * as moment from 'moment'
+import Cookies from 'js-cookie'
+import { css } from 'emotion'
+import { RouteComponentProps } from 'react-router-dom'
+import qs from 'qs'
+// 1. Import action creators and selectors from our modules
+import {
+    fetchImages
+} from '../../actions/images'
 
 interface State {
-  hotels: Array<Hotel>
   selected_state: CountryState | null
   selected_city: City | null
   selected_date: moment.Moment | null
@@ -52,10 +23,11 @@ interface State {
 }
 
 export interface ResultPageProps {
-  hotels: Array<Hotel> | null
+  images: Image[] | null
   selected_state: CountryState | null
   selected_city: City | null
   selected_date: string | null
+  fetchImages: any
 }
 
 interface Props extends ResultPageProps, RouteComponentProps {}
@@ -77,42 +49,31 @@ interface parseUrlResults {
 
 class ResultPage extends React.Component<Props, State> {
 
-  private lastLocationTitle: string = '';
-
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      hotels: props.hotels || [],
       selected_state: props.selected_state,
       selected_city: props.selected_city,
       selected_date: !!props.selected_date ? moment(props.selected_date, 'MM/DD/YYYY') : null,
-      showLocationNotFound: null,
+      showLocationNotFound: null
     }
   }
 
   public componentDidMount() {
-    this.fetchHotels()
+      this.props.fetchImages()
   }
 
   public componentDidUpdate(prevProps) {
     if(this.props.location.search != prevProps.location.search) {
       const { selected_city, selected_state, selected_date } = this.parseUrl()
-      this.setState({ selected_city, selected_state, selected_date }, this.fetchHotels)
+      // this.setState(hotels, this.props.fetchImages())
     }
-  }
-
-  public fetchHotels() {
-
-      api.get(`/images`, { }).then((result: Array<Hotel>) => {
-        this.setState({
-          hotels: result
-        })
-      })
   }
 
   public parseUrl(): parseUrlResults {
     const parsedQuery: ParsedQuery = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
+
     return {
       selected_city: parsedQuery.xcity_id ? { city: parsedQuery.city_name, id: parsedQuery.xcity_id, state_code: parsedQuery.city_state } : null,
       selected_state: parsedQuery.state ? { code: parsedQuery.state, name: parsedQuery.state_name, active: null, id: 0 } : null,
@@ -183,21 +144,26 @@ class ResultPage extends React.Component<Props, State> {
         <Container className={css`
           margin-top: 145px
         `}>
-          <NotFound
-            city={this.state.showLocationNotFound === 'city' ? this.state.selected_city : null}
-            state={this.state.showLocationNotFound === 'state' ? this.state.selected_state : null}
-          />
-          {this.state.hotels.length === 0 && <div>Loading</div>}
-            {this.state.hotels.length !== 0 && (
-                this.state.hotels.map(elem => {
-                    return (
-                        <ImageDetails {...elem} key={elem.url} />
-                    )
-                }))}
+          { this.props.images.length === 0 && <div>Loading</div>}
+            {this.props.images.length > 0 &&
+                this.props.images.map(elem => <ImageDetails {...elem} key={elem.url} />)
+            }
         </Container>
       </>
     )
   }
 }
 
-export default ResultPage;
+const mapStateToProps = (state) => {
+    return ({
+        // DONT DO THIS - USE RESELECT!
+        images: state.images.images || []
+    })
+}
+
+const mapDispatchToProps = {
+    fetchImages: fetchImages
+    // onCartUpdate: (item, val) => dispatch({ type: 'ADD_ITEM', payload: { item, val} })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultPage)

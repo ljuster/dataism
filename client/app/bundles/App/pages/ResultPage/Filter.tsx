@@ -31,7 +31,7 @@ interface ComponentState {
   focused: boolean
 }
 
-const PLACEHOLDER = 'City, state or zip code';
+const PLACEHOLDER = 'Image name';
 
 class Filter extends React.Component<Props, ComponentState> {
 
@@ -249,7 +249,7 @@ class Filter extends React.Component<Props, ComponentState> {
             display: flex;
             align-items: center;
         `}>
-          <Icon name="if_calendar" className={css`
+          <Icon name="menu" className={css`
             position: relative;
             display: block;
             color: #9c9c9b;

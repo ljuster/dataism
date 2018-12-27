@@ -9,7 +9,7 @@ const styles = `
   text-decoration: none;
   text-transform: uppercase;
   float: right;
-  background: #1bdeea;
+  background: #0b4d98;
   font-size: 15px;
   font-family: 'ProximaNova-regular';
   border: none;

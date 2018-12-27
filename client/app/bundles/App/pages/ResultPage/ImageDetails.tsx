@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import mq from 'styleguide/styles/layout/media-queries';
 import Button from 'styleguide/components/Button/Button';
 import { Col, Row } from 'styleguide/components/Layout';
-import { Hotel } from './types';
+import { Image } from './types';
 
 const Wrapper = styled('div')`
     display: flex;
@@ -48,12 +48,12 @@ const Image = styled('div')`
 `
 
 const Content = styled('div')`
-    padding: 15px 30px 15px 30px;
+    padding: 5px 5px 5px 20px;
     box-sizing: border-box;
 
     ${mq.medium(css`
-      flex: 0 0 58.333333%;
-      max-width: 58.333333%;
+      flex: 0 0 8.333333%;
+      max-width: 8.333333%;
     `)}
 `
 
@@ -103,7 +103,7 @@ const Description = styled('p')`
     line-height: 1.5;
 `
 
-interface Props extends Hotel {
+interface Props extends Image {
   locationTitle?: string
 }
 
@@ -150,9 +150,6 @@ const ImageDetails = (props: Props) => (
             ${mq.medium(css`
               margin-top: 0px;
               width: auto;
-            `)}
-            ${mq.large(css`
-              padding: 15px 32px;
             `)}
           `}>
             View

@@ -23,6 +23,7 @@ const request = (path, data = {}, type = 'get') => {
     'X-CSRF-Token': getCsrfToken()
   }
   if (type === 'get') params = { params }
+
   return new Promise((resolve) => {
     if (type === 'delete') {
       axios
@@ -36,6 +37,7 @@ const request = (path, data = {}, type = 'get') => {
         })
       return
     }
+
     axios[type](path, params, { headers })
       .then((response) => {
         resolve(response.data || response)
