@@ -1,4 +1,4 @@
-class AddUserIdToArchives < ActiveRecord::Migration
+class AddUserIdToArchives < ActiveRecord::Migration[4.2]
   def change
     add_column :archives, :user_id, :integer
   end
