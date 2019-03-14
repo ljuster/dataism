@@ -1,4 +1,6 @@
-class DataFile < ActiveRecord::Base
+class DataFile
+  include ActiveModel::Model
+  
   attr_accessor :data
 
   def initialize(params)
