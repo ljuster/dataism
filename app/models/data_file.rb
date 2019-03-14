@@ -5,8 +5,6 @@ class DataFile < ActiveRecord::Base
     @df = Daru::DataFrame.from_csv(params[:path])
     @data = clean(Daru::DataFrame.from_csv(params[:path]), params[:type])
     @corr_mat = calc_corr(@data) if params[:corr]
-    a = {:a => [1,2,3,4,5,6]}
-    b = {:b => [2,3,4,5,6,7]}
     # @df['overall'].data.data = Vector.elements(@df['overall'].data.data).normalize.to_a
     # @df['fg_pct'].data.data = Vector.elements(@df['fg_pct'].data.data).normalize.to_a
     # pearson = Statsample::Bivariate::Pearson.new(@df['overall'], @df['fg_pct'])
