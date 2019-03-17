@@ -1,17 +1,25 @@
-.container
-  %hr
-  %div.showcase__section#bubble
-    %div.spacer.small
-    %div#bubbleplots
-      %div.bubbleplot{'data-num': 0}
-        %div.plot#plotdiv
-        %div.control-row
+<div class="container">
+  <hr/>
+  <div class="showcase__section" id="bubble">
+    <div class="spacer small"></div>
+    <div id="bubbleplots">
+      <div class="bubbleplot" data-num="0">
+        <div class="plot" id="plotdiv"></div>
+        <div class="control-row">
           Statistic:
-          %select.statdata
-  - if !@hide
-    %div.alert-link=link_to('win/loss analysis',:controller => :welcome, :action => :'win_loss_viz')
+          <select class="statdata"></select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if !@hide %>
+    <div class="alert-link">
+      <%= link_to('win/loss analysis',:controller => :welcome, :action => :'win_loss_viz') %>
+    </div>
+  <% end %>
+</div>
+<script>
 
-:javascript
 
   function unpack(rows, key) {
     return rows.map(function(row) {
@@ -19,8 +27,8 @@
     });
   }
 
-  var allStatNames = unpack(#{@df.data.keys},0);
-  var data = #{@df.data.to_json}
+  var allStatNames = unpack(<%= raw @df.data.keys %>,0);
+  var data = <%= raw @df.data.to_json %>;
   var chosenStat = null;
 
   function getStatData(chosenStat) {
@@ -28,7 +36,7 @@
     currentStat2 = [];
     for (var i = 0; i < allStatNames.length ; i++) {
       if (allStatNames[i] === chosenStat) {
-        currentStat1.push(#{@df.data['overall'][:raw]});
+        currentStat1.push(<%= @df.data['overall'][:raw] %>);
         currentStat2.push(data[chosenStat]['raw']);
       }
     }
@@ -36,7 +44,7 @@
 
   // Default Stat Data
   if (chosenStat != null){
-      setBubblePlot(chosenStat);
+    setBubblePlot(chosenStat);
     }else{
       setBubblePlot('scoring_margin');
     }
@@ -47,7 +55,7 @@
     var trace1 = {
       x: currentStat1[0],
       y: currentStat2[0],
-      text: #{@df.data['team_name'][:raw]},
+      text: <%= raw @df.data['team_name'][:raw] %>,
       mode: 'markers',
       marker: {
         size: 12,
@@ -90,3 +98,6 @@
     statSelector.addEventListener('change', updateStat, false);
 
 
+
+
+</script>
