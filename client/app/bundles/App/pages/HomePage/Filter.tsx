@@ -1,13 +1,17 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import { css } from 'emotion';
+import { connect } from 'react-redux'
 import mq from 'styleguide/styles/layout/media-queries';
 import _ from 'lodash';
 import Autocomplete from 'react-autocomplete';
-import { CountryState, City } from './types';
-import api from 'lib/api/apiCall';
+import { User } from './types';
 import Icon from 'styleguide/components/Icon/Icon';
 import Datepicker from 'styleguide/components/Datepicker/Datepicker';
+import {
+    fetchUsers,
+    clearUsers
+} from '../../actions/users'
 
 interface Option {
   label: string
@@ -15,23 +19,22 @@ interface Option {
 }
 
 interface Props {
-  selected_state: CountryState | null
-  selected_city: City | null
+  users: User[] | null
+  selected_user: User | null
   selected_date: moment.Moment | null
   onDateChange: (date: moment.Moment) => void
-  onLocationSelect: (location: CountryState | City) => void
+  onUserSelect: (name: User) => void
+  clearUsers: any
+  fetchUsers: any
 }
 
-type ApiDataType = Array<CountryState> | Array<City> | []
-
 interface ComponentState {
-  loadedDataType: 'state' | 'city' | null
-  apiData: ApiDataType
+  users: User[]
   value: string
   focused: boolean
 }
 
-const PLACEHOLDER = 'Image name';
+const PLACEHOLDER = 'User name';
 
 class Filter extends React.Component<Props, ComponentState> {
 
@@ -39,116 +42,68 @@ class Filter extends React.Component<Props, ComponentState> {
     super(props);
 
     this.state = {
-      loadedDataType: null,
-      apiData: [],
+      users: [],
       value: '',
       focused: false,
     }
   }
 
-  public fetchData = (str) => {
-    if (str.length === 0) return Promise.resolve();
-    return new Promise((res, rej) => {
-      api.get(`/q/${str}`, {}).then((result: any)  => {
-        if (result.length > 0) {
-          if (!!result[0].name) {
-            this.setState({
-              loadedDataType: 'state',
-              apiData: result,
-            }, () => res())
-          } else {
-            this.setState({
-              loadedDataType: 'city',
-              apiData: result,
-            }, () => res())
-          }
-        }
-      })
-    });
-  }
-
   public getOptions = (): Option[] => {
-    const { loadedDataType, apiData } = this.state;
+    const { users } = this.props
 
-    if (apiData.length === 0) return []
-
-    if (loadedDataType === 'city') {
-      let cities = apiData as Array<City>
-      return cities
-              .map(elem => ({ label: `${elem.city}, ${elem.state_code}`, value: elem.id.toString() }))
-    }
-
-    if (loadedDataType === 'state') {
-      let countryStates = apiData as Array<CountryState>
-      return countryStates
-                  .filter(elem => !!elem.active)
-                  .map(elem => ({ label: elem.name, value: elem.code }))
-    }
-
-    return []
+    if (users.length === 0) return []
+      return users
+              .map(elem => ({ label: `${elem.name}`, value: elem.id.toString() }))
   }
 
 
 
   public getInputValue = () => {
     const { focused, value } = this.state;
-    const { selected_city, selected_state } = this.props;
+    const { selected_user } = this.props;
 
     if (focused) {
       return value
     }
 
-    if (!!selected_city) {
-      return `${selected_city.city}, ${selected_city.state_code}`;
-    }
-
-    if (!!selected_state) {
-      return selected_state.name
+    if (!!selected_user) {
+      return selected_user.name
     }
 
     return PLACEHOLDER
   }
 
   public onChange = (e, value) => {
+    this.props.clearUsers()
     this.setState({
-      loadedDataType: null,
       value,
-      apiData: [],
-    },() => this.fetchData(value))
+    },() => this.props.fetchUsers(value))
   }
 
   public onFocus = () => {
+    this.props.clearUsers()
     this.setState({
       focused: true,
-      apiData: [],
+      users: [],
     }, () => {
 
       let str = this.state.value
 
-      if (str.length === 0 && !!this.props.selected_city) {
-        str = this.props.selected_city.city
-      }
-
-      if (str.length === 0 && !!this.props.selected_state) {
-        str = this.props.selected_state.name
+      if (str.length === 0 && !!this.props.selected_user) {
+        str = this.props.selected_user.name
       }
 
       if (str.length === 0) return
 
-      this.fetchData(str)
+      this.props.fetchUsers(str)
 
     })
   }
 
 
   public onSelect = (value: string) => {
-    if (this.state.loadedDataType === 'state') {
-      const location = _.find(this.state.apiData, (elem: CountryState) => elem.code === value)
-      this.props.onLocationSelect(location)
-    } else {
-      const location = _.find(this.state.apiData, (elem: City) => elem.id.toString() === value)
-      this.props.onLocationSelect(location)
-    }
+      const user = _.find(this.props.users, (elem: User) => elem.id.toString() === value)
+      this.props.onUserSelect(user)
   }
 
   render() {
@@ -269,4 +224,17 @@ class Filter extends React.Component<Props, ComponentState> {
   }
 }
 
-export default Filter;
+const mapStateToProps = (state) => {
+    return ({
+        // DONT DO THIS - USE RESELECT!
+        users: state.users.users || []
+    })
+}
+
+const mapDispatchToProps = {
+    clearUsers: clearUsers,
+    fetchUsers: (name) => fetchUsers(name)
+    // onCartUpdate: (item, val) => dispatch({ type: 'ADD_ITEM', payload: { item, val} })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

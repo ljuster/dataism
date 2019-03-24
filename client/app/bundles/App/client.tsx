@@ -6,7 +6,7 @@ import { configureClientStore } from './store/configureStore'
 import Routes, { RailsAppProps } from './routes'
 
 const App = (props: RailsAppProps) => {
-    const store = configureClientStore({images: {}, checkout: {}});
+    const store = configureClientStore({images: {}, checkout: {}, users: {}});
 
     return (
       <Provider store={store}>

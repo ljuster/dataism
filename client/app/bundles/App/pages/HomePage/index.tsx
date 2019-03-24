@@ -2,11 +2,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import Container from 'styleguide/components/Layout/Container'
 import ImageDetails from './ImageDetails'
-import { Image, CountryState, City, isCountryState } from './types'
+import { Image, User } from './types'
 import LayoutHeader from './LayoutHeader'
 import Filter from './Filter'
 import * as moment from 'moment'
-import Cookies from 'js-cookie'
 import { css } from 'emotion'
 import { RouteComponentProps } from 'react-router-dom'
 import qs from 'qs'
@@ -14,49 +13,49 @@ import qs from 'qs'
 import {
     fetchImages
 } from '../../actions/images'
+import {
+    fetchUsers
+} from '../../actions/users'
 
-interface State {
-  selected_state: CountryState | null
-  selected_city: City | null
-  selected_date: moment.Moment | null
-  showLocationNotFound: 'state' | 'city' | null
-}
 
-export interface ResultPageProps {
+export interface HomePageProps {
   images: Image[] | null
-  selected_state: CountryState | null
-  selected_city: City | null
+  selected_user: User | null
   selected_date: string | null
   fetchImages: any
+  fetchUsers: any
 }
 
-interface Props extends ResultPageProps, RouteComponentProps {}
+interface Props extends HomePageProps, RouteComponentProps {}
 
 interface ParsedQuery {
-  xcity_id: number
-  city_name: string
-  city_state: string
-  state: string
-  state_name: string
+  user_id: number
+  user_name: string
   date: moment.Moment
 }
 
 interface parseUrlResults {
-  selected_state: CountryState | null
-  selected_city: City | null
+  selected_user: User | null
   selected_date: moment.Moment | null
 }
 
-class ResultPage extends React.Component<Props, State> {
+interface componentState {
+    users: User[] | null
+    selected_date: moment.Moment | null
+    selected_user: User | null
+    showUserNotFound: 'user' | null
+}
+
+class HomePage extends React.Component<Props, componentState> {
 
   constructor(props) {
     super(props)
 
     this.state = {
-      selected_state: props.selected_state,
-      selected_city: props.selected_city,
+      selected_user: props.selected_user,
       selected_date: !!props.selected_date ? moment(props.selected_date, 'MM/DD/YYYY') : null,
-      showLocationNotFound: null
+      showUserNotFound: null,
+      users: null
     }
   }
 
@@ -66,8 +65,8 @@ class ResultPage extends React.Component<Props, State> {
 
   public componentDidUpdate(prevProps) {
     if(this.props.location.search != prevProps.location.search) {
-      const { selected_city, selected_state, selected_date } = this.parseUrl()
-      // this.setState(hotels, this.props.fetchImages())
+      const { selected_user } = this.parseUrl()
+      this.props.fetchUsers(selected_user)
     }
   }
 
@@ -75,8 +74,7 @@ class ResultPage extends React.Component<Props, State> {
     const parsedQuery: ParsedQuery = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
 
     return {
-      selected_city: parsedQuery.xcity_id ? { city: parsedQuery.city_name, id: parsedQuery.xcity_id, state_code: parsedQuery.city_state } : null,
-      selected_state: parsedQuery.state ? { code: parsedQuery.state, name: parsedQuery.state_name, active: null, id: 0 } : null,
+      selected_user: parsedQuery.user_id ? { name: parsedQuery.user_name, id: parsedQuery.user_id } : null,
       selected_date: parsedQuery.date ? moment(parsedQuery.date, 'MM/DD/YYYY') : null,
     }
   }
@@ -87,35 +85,19 @@ class ResultPage extends React.Component<Props, State> {
     }, this.updateUrl)
   }
 
-  public onLocationSelect = (location: CountryState | City) => {
-    if (isCountryState(location)) {
+  public onUserSelect = (user: User ) => {
       this.setState({
-        selected_state: location,
-        selected_city: null,
-        showLocationNotFound: null,
+        selected_user: user,
+        showUserNotFound: null,
       }, this.updateUrl)
-      Cookies.set('state_code', location.code)
-    } else {
-      this.setState({
-        selected_state: null,
-        selected_city: location,
-        showLocationNotFound: null,
-      }, this.updateUrl)
-      Cookies.set('xcity_id', location.id)
-    }
   }
 
   public updateUrl = () => {
-    const { selected_city, selected_state, selected_date } = this.state
+    const { selected_user, selected_date } = this.state
     let url = this.props.location.pathname
     let params = []
-    if (!!selected_city) {
-      params.push(`xcity_id=${selected_city.id}`)
-      params.push(`city_name=${selected_city.city}`)
-      params.push(`city_state=${selected_city.state_code}`)
-    } else if (!!selected_state) {
-      params.push(`state=${selected_state.code}`)
-      params.push(`state_name=${selected_state.name}`)
+    if (!!selected_user) {
+      params.push(`user_id=${selected_user.id}`)
     }
 
     if (!!selected_date) {
@@ -135,11 +117,10 @@ class ResultPage extends React.Component<Props, State> {
       <>
         <LayoutHeader SecondRowComponent={() =>
           <Filter
-            selected_city={this.state.selected_city}
-            selected_state={this.state.selected_state}
+            selected_user={this.state.selected_user}
             selected_date={this.state.selected_date}
             onDateChange={this.onDateChange}
-            onLocationSelect={this.onLocationSelect}
+            onUserSelect={this.onUserSelect}
           />} />
         <Container className={css`
           margin-top: 145px
@@ -162,8 +143,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    fetchImages: fetchImages
+    fetchImages: fetchImages,
+    fetchUsers: (name) => fetchUsers(name)
     // onCartUpdate: (item, val) => dispatch({ type: 'ADD_ITEM', payload: { item, val} })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResultPage)
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

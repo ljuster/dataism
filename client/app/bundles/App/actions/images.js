@@ -20,10 +20,10 @@ export const fetchImagesSuccess = (images) => {
     }
 }
 
-export const fetchImagesFailure = (images) => {
+export const fetchImagesFailure = (error) => {
     return {
-        type: FETCH_IMAGES_SUCCESS,
-        payload: {images: images }
+        type: FETCH_IMAGES_FAILURE,
+        payload: { error: error }
     }
 }
 
@@ -35,10 +35,7 @@ export function fetchImages() {
             response => dispatch(fetchImagesSuccess(response))
         )
         .catch(error => {
-            dispatch({
-                type: FETCH_IMAGES_FAILURE,
-                payload: { error: error }
-            })
+            dispatch(fetchImagesFailure(error))
         })
     }
 }

@@ -23,22 +23,11 @@ const Wrapper = styled('div')`
     `)}
 `
 
-const LocationTitle = styled('h2')`
-    max-width: 1024px;
-    margin: 0 auto;
-    padding-bottom: 25px;
-    font-family: 'cera-thin';
-    color: #5e5e5e;
-    font-weight: 500;
-    line-height: 1.1;
-    font-size: 2rem;
-`
-
 const Image = styled('div')`
     align-self: stretch;
     background-image: url('${(props: any) => props.url}');
     background-size: cover;
-    height: 500px;
+    height: 700px;
 
     ${mq.medium(css`
       height: auto;
@@ -109,9 +98,7 @@ interface Props extends Image {
 
 const ImageDetails = (props: Props) => (
   <>
-  {!!props.locationTitle && <LocationTitle>{props.locationTitle}</LocationTitle>}
   <Wrapper>
-    {/* TODO: remove base url */}
     <Image url={props.url} />
     <Content>
       <Title name={props.name} code={`props.code`} city_name={`props.city_name`} />

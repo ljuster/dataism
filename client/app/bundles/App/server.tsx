@@ -8,7 +8,7 @@ import { StaticRouter } from 'react-router-dom'
 import Routes, { RailsAppProps } from './routes'
 
 const renderRouter = (props: RailsAppProps, location: string) => {
-    const store = configureServerStore({ images: {}, checkout: {} })
+    const store = configureServerStore({ images: {}, checkout: {}, users: {} })
 
     return (
     <Provider store={store}>
