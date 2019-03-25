@@ -7,10 +7,10 @@ import {
 } from '../constants/users'
 
 
-export const fetchUsersRequest = (name) => {
+export const fetchUsersRequest = () => {
     return {
         type: FETCH_USERS_REQUEST,
-        payload: { name: name}
+        payload: {}
     }
 }
 
@@ -35,11 +35,11 @@ export const clearUsers = () => {
     }
 }
 
-export function fetchUsers() {
+export function fetchUsers(name) {
     return function(dispatch) {
         dispatch(fetchUsersRequest)
 
-        api.get(`/users`, { }).then(
+        api.get(`/users`, { name: name }).then(
             response => dispatch(fetchUsersSuccess(response))
         )
         .catch(error => {

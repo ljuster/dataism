@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-    render json: @users
+    render json: User.where("name ilike '%#{params[:name]}%'")
   end
 
   # GET /users/1
