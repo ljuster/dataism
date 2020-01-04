@@ -1,0 +1,22 @@
+.container
+  %p.notice
+    = notice
+
+  %p
+    %strong Name:
+    = @event.name
+
+  %p
+    %strong Special Instructions:
+    = @event.special_instructions
+
+  %p
+    %strong Starts At:
+    = @event.starts_at
+
+  %p
+    %strong Invite At:
+    = @event.invite_at
+
+  = link_to 'Edit', edit_event_path(@event)
+  = link_to 'Back', events_path

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users
+  resources :events
   resources :images
   resources :records
   resources :variables

@@ -1,0 +1,23 @@
+= form_for(@event) do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2 = pluralize(@event.errors.count, "error")
+      prohibited this event from being saved:
+
+      %ul
+      = @event.errors.full_messages.each do |message|
+        %li = message
+  .field
+    = f.label :starts_at
+    = f.datetime_select :starts_at
+  .field
+    = f.label :invite_at
+    = f.datetime_select :invite_at
+  .field
+    = f.label :special_instructions
+    = f.text_field :special_instructions
+  .field
+    %input.multiple{:label=> "image", :type=>"file"}
+    %form.callback{:action=> "/file-upload", :class=> "dropzone"}
+    .actions
+      = f.submit
