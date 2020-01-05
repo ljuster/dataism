@@ -2,7 +2,7 @@
 class WelcomeController < ApplicationController
 
   def index
-
+    @event = Event.first
   end
   # GET /welcome
   def gallery

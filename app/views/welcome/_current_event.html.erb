@@ -1,0 +1,35 @@
+<div class="container" style="background:darkslategrey">
+  <h2> Date: <%= event.starts_at.strftime('%m-%d') %>
+    Time: <%= event.starts_at.localtime.strftime('%l:%M %p')%> - <%= (event.starts_at + 2.hours).localtime.strftime('%l:%M %p') %></h2>
+  <table class="table-bordered" style="color:navajowhite;font-size:large;margin: auto;width: 50% !important;">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Attending?</th>
+    <th>Daily Pass $7</th>
+    <th>Paid for season?</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% event.participations.each do |participation| %>
+    <tr>
+      <td><%= link_to participation.user.name, user_path(participation.user) %></td>
+      <td>
+        <%= form_for [:admin, participation], method: :put, remote: true do |f| %>
+          <div class="ui toggle checkbox <%= 'checked' if participation.attending %>">
+            <%= f.check_box :rsvp, {class: 'submittable-checkbox'}, "true", "false" %>
+            <label for="participation_total_paid"></label>
+          </div>
+        <% end %>
+      </td>
+      <td ><%= participation.user.total_paid >= 45 ? 'X' : participation.amount_paid %></td>
+      <td ><%= participation.user.total_paid >= 45 %></td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
+  <br/>
+  <br/>
+  <br/>
+</div>

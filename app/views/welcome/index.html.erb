@@ -1,9 +1,10 @@
 <div class="jumbotron text-center">
   <div class="container">
     <a class="lang-logo" href="/">
-      <%= image_tag("lang-logo.png") %>
+      <%= image_tag("mctrent.png") %>
     </a>
-    <h1>Creative expression, learning, data, connection</h1>
+    <h1>Are you coming to basketball this Sunday</h1>
+      <%= render partial: 'welcome/current_event', locals: {event: @event} %>
     <button class="btn btn-lg btn-default">
       <%= link_to('Gallery',:controller => :welcome, :action => :gallery) %>
     </button>

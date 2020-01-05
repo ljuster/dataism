@@ -2,21 +2,34 @@
   %p.notice
     = notice
 
-  %p
-    %strong Name:
-    = @event.name
+  .container
+  %p.notice
+    = notice
 
-  %p
-    %strong Special Instructions:
-    = @event.special_instructions
+  %h1 RSVP List
+  %h3 "#{@event.starts_at}"
+  %table
+    %thead
+      %tr
+        %th{:colspan => 3} Name
+        %th{:colspan => 3} Attending
+        %th{:colspan => 3} Paid for Season
+        %th{:colspan => 3} Payment for Day
 
-  %p
-    %strong Starts At:
-    = @event.starts_at
+    %tbody
+      - @event.participations.each do |participation|
+        %tr
+          %td{:colspan => 3}
+            = participation.name
+          %td{:colspan => 3}
+            = participation.attending
+          %td{:colspan => 3}
+            = participation.user.paid_for_season?
+          %td{:colspan => 3}
+            = participation.amount_paid
+          %td{:colspan => 3}
+            = link_to "Show #{user.name} history", articipation.user
 
-  %p
-    %strong Invite At:
-    = @event.invite_at
+  %br
 
-  = link_to 'Edit', edit_event_path(@event)
-  = link_to 'Back', events_path
+  = link_to 'New Purchase', new_purchase_path

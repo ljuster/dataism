@@ -10,7 +10,7 @@ class ArchivesController < ApplicationController
     @archives = Archive.all
     after = "2012-11-01T13:00:00Z"
     before= "2012-11-02T03:12:14-03:00"
-    time_span = getTimeSpan(after,before)
+    time_span = get_time_span(after,before)
     gz = open('http://data.githubarchive.org/2015-01-01-0.json.gz')
     # gz = open("http://data.githubarchive.org/#{time_span}.json.gz")
     js = Zlib::GzipReader.new(gz).read
@@ -82,7 +82,7 @@ class ArchivesController < ApplicationController
     end
   end
 
-  def getTimeSpan(after,before)
+  def get_time_span(after,before)
     a = after.split('-')
     a_yr = a[0]
     a_mo = a[1]
