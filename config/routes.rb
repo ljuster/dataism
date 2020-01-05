@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :users
   resources :events
   resources :images
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get '/welcome/:action', controller: 'welcome'
 
+  get '/admin/index', controller: 'admin'
+  put '/admin/participation', controller: 'admin'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
