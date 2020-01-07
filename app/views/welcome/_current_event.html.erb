@@ -13,11 +13,11 @@
   <tbody>
   <% event.participations.each do |participation| %>
     <tr>
-      <td><%= link_to participation.user.name, user_path(participation.user) %></td>
+      <td><%= link_to participation&.user&.name, user_path(participation.user) %></td>
       <td>
         <%= form_for [:admin, participation], method: :put, remote: true do |f| %>
           <div class="ui toggle checkbox <%= 'checked' if participation.attending %>">
-            <%= f.check_box :rsvp, {class: 'submittable-checkbox'}, "true", "false" %>
+            <%= f.check_box :attending, {class: 'submittable-checkbox'}, "true", "false" %>
             <label for="participation_total_paid"></label>
           </div>
         <% end %>

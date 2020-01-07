@@ -28,6 +28,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        @event.add_participations(User.all)
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -69,6 +70,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :special_instructions, :starts_at, :invite_at)
+      params.require(:event).permit(:name, :special_instructions, :starts_at)
     end
 end

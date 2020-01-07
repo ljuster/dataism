@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :participations
 
   def total_paid
-    participations.map(&:amount_paid).sum
+    return participations.map(&:amount_paid).sum + amount_paid if participations.map(&:amount_paid).sum
+    amount_paid
   end
 end

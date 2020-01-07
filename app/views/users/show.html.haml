@@ -23,7 +23,7 @@
         %td{:colspan => 3}
           = @user.email
         %td{:colspan => 3}
-          = @user.paid_for_season?
+          = @user.amount_paid
         %td{:colspan => 3}
           = @user&.participations&.map(&:amount_paid)&.sum
 

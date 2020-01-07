@@ -9,7 +9,10 @@ class Participation < ApplicationRecord
   belongs_to :user
   belongs_to :event
 
-  def rsvp
-    self.touch :rsvped_at
-  end
+  validates_presence_of :event,
+                        :user
+
+  #def rsvp
+  #  self.touch :rsvped_at unless new_record?
+  #end
 end
