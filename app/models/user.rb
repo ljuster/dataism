@@ -6,7 +6,11 @@ class User < ApplicationRecord
   has_many :participations
 
   def total_paid
-    return participations.map(&:amount_paid).sum + amount_paid if participations.map(&:amount_paid).sum
+    return participations.map(&:amount_paid).sum + self.amount_paid if participations.map(&:amount_paid).sum
     amount_paid
+  end
+
+  def authenticate_admin
+    ["leorajuster@gmail.com", "mckenziect@gmail.com"].include?(email)
   end
 end
