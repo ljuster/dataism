@@ -15,10 +15,10 @@ Rails.application.configure do
   # config.serve_static_assets = true
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = 'example.com' #replace with your own url
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {

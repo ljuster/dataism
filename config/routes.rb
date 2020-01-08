@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get '/admin/index', controller: 'admin'
   put '/admin/participation', controller: 'admin'
+  get '/admin/send_friday_reminder', controller: 'admin'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
